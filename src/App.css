@@ -44,6 +44,11 @@ nav > h1 {
 
 .btnBox {
     display: flex;
+    align-items: center;
+}
+
+.btnBox * {
+    margin: 0 .2rem;
 }
 
 .btn {
@@ -58,9 +63,18 @@ nav > h1 {
     color: var(--coolWhite);
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 98%;
+    margin: 0 1%;
+}
+
 .cardBox {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .userCard {
@@ -80,6 +94,11 @@ nav > h1 {
     cursor: pointer;
     transform: translate(3px, 3px);
     box-shadow: none;
+}
+
+.userCard *:not(img) {
+    margin-top:.5rem;
+    margin-bottom: 0;
 }
 
 .userCard img {

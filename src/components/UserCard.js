@@ -11,7 +11,7 @@ const UserCard = (props) => {
         <div className="userCard" onClick={()=>handleCardClick()}>
             <img src={user.profileImg} alt={user.firstName} />
             <h3>{user.firstName} {user.lastName}</h3>
-            <p className="caps">{user.pronouns}</p>
+            <p>{user.faveClass.join(', ')}</p>
         </div>
     )
 }

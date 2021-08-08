@@ -99,38 +99,43 @@ const App = () => {
             currentUser={currentUser}
             setCurrentPage={setCurrentPage}
             setCurrentUser={setCurrentUser}/>
-        {currentPage === "logIn" &&
-            <LogIn
-                setCurrentPage={setCurrentPage}
-                setCurrentUser={setCurrentUser}/>
-        }
-        {currentPage === 'signUp' &&
-            <NewUser
-                changeHandlers={changeHandlers}
-                newStates={newStates}
-                getUsers={getUsers}
-                clearFormStates={clearFormStates}
-            />
-        }
-        {currentPage === "editUser" &&
-            <EditUser
-                changeHandlers={changeHandlers}
-                newStates={newStates}
-                getUsers={getUsers}
-                clearFormStates={clearFormStates}
-                currentUser={currentUser}
-                getCurrentUser={getCurrentUser}
-            />
-        }
-        {currentPage === 'usersIndex' &&
-        <div className="cardBox">
-            {users.map((user, index) => {
-                return <UserCard key={index}
-                    user={user}
-                    getCurrentUser={getCurrentUser}/>
-            })}
-        </div>
-        }
+        <main>
+            {currentPage === "logIn" &&
+                <LogIn
+                    setCurrentPage={setCurrentPage}
+                    setCurrentUser={setCurrentUser}/>
+            }
+            {currentPage === 'signUp' &&
+                <NewUser
+                    changeHandlers={changeHandlers}
+                    newStates={newStates}
+                    getUsers={getUsers}
+                    clearFormStates={clearFormStates}
+                />
+            }
+            {currentPage === "editUser" &&
+                <EditUser
+                    changeHandlers={changeHandlers}
+                    newStates={newStates}
+                    getUsers={getUsers}
+                    clearFormStates={clearFormStates}
+                    currentUser={currentUser}
+                    getCurrentUser={getCurrentUser}
+                />
+            }
+            {currentPage === 'usersIndex' &&
+            <>
+            <h1>All Users</h1>
+            <div className="cardBox">
+                {users.map((user, index) => {
+                    return <UserCard key={index}
+                        user={user}
+                        getCurrentUser={getCurrentUser}/>
+                })}
+            </div>
+            </>
+            }
+        </main>
         </>
     )
 }
