@@ -23,18 +23,19 @@ const NewUser = (props) => {
   return (
     <>
       <form onSubmit={handleNewUserCreation}>
+        <h1>Sign Up</h1>
         <label htmlFor="email">Email: </label>
-        <input type="text" onChange={props.changeHandlers.emailChange}/><br/>
+        <input type="text" onChange={props.changeHandlers.emailChange}/>
         <label htmlFor="password">Password: </label>
-        <input type="text" onChange={props.changeHandlers.passwordChange}/><br/>
+        <input type="text" onChange={props.changeHandlers.passwordChange}/>
         <label htmlFor="firstname">First Name: </label>
-        <input type="text" onChange={props.changeHandlers.firstChange}/><br/>
+        <input type="text" onChange={props.changeHandlers.firstChange}/>
         <label htmlFor="lastname">Last Name: </label>
-        <input type="text" onChange={props.changeHandlers.lastChange}/><br/>
+        <input type="text" onChange={props.changeHandlers.lastChange}/>
         <label htmlFor="pronouns">Pronouns: </label>
-        <input type="text" onChange={props.changeHandlers.pronounsChange}/><br/>
+        <input type="text" onChange={props.changeHandlers.pronounsChange}/>
         <label htmlFor="profilepic">Profile Picture: </label>
-        <input type="text" onChange={props.changeHandlers.picChange}/><br/>
+        <input type="text" onChange={props.changeHandlers.picChange}/>
         <label htmlFor="faveClass">Favorite Class: </label>
         <select onChange={props.changeHandlers.classChange}>
           <option value="Artificer">Artificer</option>

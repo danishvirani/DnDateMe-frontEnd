@@ -33,6 +33,7 @@ const LogIn = (props) => {
     return (
         <>
         <form onSubmit={(e)=>validateLogin(e)}>
+            <h1>Log In</h1>
             <label htmlFor='email'>Email: </label>
             <input type='text' id='email' onChange={(e)=>handleChangeEmail(e)} />
             <label htmlFor='password'>Password: </label>

@@ -9,10 +9,10 @@ const NavBar = (props) => {
     return(
         <nav>
             <h1>DnDateMe</h1>
-            {props.currentUser &&
-                <p>Signed in as {props.currentUser.firstName}</p>
-            }
             <div className="btnBox">
+                {props.currentUser &&
+                    <p>Signed in as {props.currentUser.firstName}</p>
+                }
                 <button className="btn btn-nav" onClick={()=> {props.setCurrentPage('usersIndex'); props.getUsers()}}>Home</button>
                 {props.currentUser ?
                     <>

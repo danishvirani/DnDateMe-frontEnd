@@ -8,6 +8,7 @@ import LogIn from './components/LogIn'
 import NewUser from './components/NewUser'
 import EditUser from './components/EditUser'
 import UserCard from './components/UserCard'
+import ShowUser from './components/ShowUser'
 
 const App = () => {
 
@@ -24,15 +25,8 @@ const App = () => {
 
     let [users, setUsers] = useState([])
     let [currentUser, setCurrentUser] = useState({})
+    let [showUser, setShowUser] = useState({})
     let [currentPage, setCurrentPage] = useState('usersIndex')
-
-    const getCurrentUser = (id) => {
-        axios
-            .get(`https://dndateme-backend.herokuapp.com/users/${id}`)
-            .then((response) => {
-                setCurrentUser(response.data)
-            })
-    }
 
     useEffect(() => {
         getCurrentUser('610dae1157fdeb0015d073cf')
@@ -92,45 +86,74 @@ const App = () => {
             })
     }
 
+    const getCurrentUser = (id) => {
+        axios
+            .get(`https://dndateme-backend.herokuapp.com/users/${id}`)
+            .then((response) => {
+                setCurrentUser(response.data)
+            })
+    }
+
+    const handleShowUser = (id) => {
+        axios
+            .get(`https://dndateme-backend.herokuapp.com/users/${id}`)
+            .then((response) => {
+                setShowUser(response.data)
+                setCurrentPage('showUser')
+            })
+    }
+
     return (
         <>
         <NavBar
             getUsers={getUsers}
             currentUser={currentUser}
             setCurrentPage={setCurrentPage}
-            setCurrentUser={setCurrentUser}/>
-        {currentPage === "logIn" &&
-            <LogIn
-                setCurrentPage={setCurrentPage}
-                setCurrentUser={setCurrentUser}/>
-        }
-        {currentPage === 'signUp' &&
-            <NewUser
-                changeHandlers={changeHandlers}
-                newStates={newStates}
-                getUsers={getUsers}
-                clearFormStates={clearFormStates}
-            />
-        }
-        {currentPage === "editUser" &&
-            <EditUser
-                changeHandlers={changeHandlers}
-                newStates={newStates}
-                getUsers={getUsers}
-                clearFormStates={clearFormStates}
-                currentUser={currentUser}
-                getCurrentUser={getCurrentUser}
-            />
-        }
-        {currentPage === 'usersIndex' &&
-        <div className="cardBox">
-            {users.map((user, index) => {
-                return <UserCard key={index}
-                    user={user}
-                    getCurrentUser={getCurrentUser}/>
-            })}
-        </div>
-        }
+            setCurrentUser={setCurrentUser}
+            handleShowUser={handleShowUser}/>
+        <main>
+            {currentPage === "logIn" &&
+                <LogIn
+                    setCurrentPage={setCurrentPage}
+                    setCurrentUser={setCurrentUser}/>
+            }
+            {currentPage === 'signUp' &&
+                <NewUser
+                    changeHandlers={changeHandlers}
+                    newStates={newStates}
+                    getUsers={getUsers}
+                    clearFormStates={clearFormStates}
+                />
+            }
+            {currentPage === "editUser" &&
+                <EditUser
+                    changeHandlers={changeHandlers}
+                    newStates={newStates}
+                    getUsers={getUsers}
+                    clearFormStates={clearFormStates}
+                    currentUser={currentUser}
+                    getCurrentUser={getCurrentUser}
+                />
+            }
+            {currentPage === 'usersIndex' &&
+                <>
+                <h1>All Users</h1>
+                <div className="cardBox">
+                    {users.map((user, index) => {
+                        return <UserCard key={index}
+                            user={user}
+                            getCurrentUser={getCurrentUser}
+                            handleShowUser={handleShowUser}/>
+                    })}
+                </div>
+                </>
+            }
+            {currentPage === "showUser" &&
+                <ShowUser
+                    showUser={showUser}
+                    currentUser={currentUser}/>
+            }
+        </main>
         </>
     )
 }
