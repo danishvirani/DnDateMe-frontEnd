@@ -4,6 +4,7 @@ import axios from 'axios'
 import './App.css'
 
 import NewUser from './components/NewUser'
+import EditUser from './components/EditUser'
 
 const App = () => {
 
@@ -16,6 +17,19 @@ const App = () => {
   let [newProfilePic, setNewProfilePic] = useState('')
   let [newFriends, setNewFriends] = useState('')
   let [users, setUsers] = useState([])
+  let [currentUser, setCurrentUser] = useState({})
+
+  const getCurrentUser = (id) => {
+    axios
+        .get(`https://dndateme-backend.herokuapp.com/users/${id}`)
+        .then((response) => {
+            setCurrentUser(response.data)
+        })
+  }
+
+  useEffect(() => {
+    getCurrentUser('610dae1157fdeb0015d073cf')
+  },[])
 
   let newStates = {
         newEmail:newEmail,
@@ -77,6 +91,13 @@ const App = () => {
     newStates={newStates}
     getUsers={getUsers}
     clearFormStates={clearFormStates}
+    />
+    <EditUser
+    changeHandlers={changeHandlers}
+    newStates={newStates}
+    getUsers={getUsers}
+    clearFormStates={clearFormStates}
+    currentUser={currentUser}
     />
     </>
   )
