@@ -1,3 +1,48 @@
+:root {
+    --black: #0c1829;
+    --navy: #1d3557;
+    --middleBlue: #457B9D;
+    --coolWhite: #F1FAEE;
+}
+
+*:not(input, select, button) {
+    color: var(--coolWhite);
+}
+
+body {
+    background: var(--navy);
+    padding: 10px;
+}
+
 .hidden {
     display: none;
+}
+
+.cardBox {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.userCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--middleBlue);
+    padding: .5rem;
+    border-radius: .5rem;
+    margin: .25rem;
+    box-shadow: 3px 3px 5px var(--black);
+    transition: .05s;
+    max-width: 250px;
+}
+
+.userCard:hover {
+    cursor: pointer;
+    transform: translate(3px, 3px);
+    box-shadow: none;
+}
+
+.userCard img {
+    background: var(--black);
+    max-width: 100%;
 }

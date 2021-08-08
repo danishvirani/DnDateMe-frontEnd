@@ -5,6 +5,7 @@ import './App.css'
 
 import NewUser from './components/NewUser'
 import EditUser from './components/EditUser'
+import UserCard from './components/UserCard'
 
 const App = () => {
 
@@ -29,6 +30,7 @@ const App = () => {
 
   useEffect(() => {
     getCurrentUser('610dae1157fdeb0015d073cf')
+    getUsers()
   },[])
 
   let newStates = {
@@ -84,23 +86,28 @@ const App = () => {
             })
     }
 
-  return (
-    <>
-    <NewUser
-    changeHandlers={changeHandlers}
-    newStates={newStates}
-    getUsers={getUsers}
-    clearFormStates={clearFormStates}
-    />
-    <EditUser
-    changeHandlers={changeHandlers}
-    newStates={newStates}
-    getUsers={getUsers}
-    clearFormStates={clearFormStates}
-    currentUser={currentUser}
-    />
-    </>
-  )
+    return (
+        <>
+        <NewUser
+        changeHandlers={changeHandlers}
+        newStates={newStates}
+        getUsers={getUsers}
+        clearFormStates={clearFormStates}
+        />
+        <EditUser
+        changeHandlers={changeHandlers}
+        newStates={newStates}
+        getUsers={getUsers}
+        clearFormStates={clearFormStates}
+        currentUser={currentUser}
+        />
+        <div className="cardBox">
+            {users.map((user, index) => {
+                return <UserCard key={index} user={user}/>
+            })}
+        </div>
+        </>
+    )
 
 }
 

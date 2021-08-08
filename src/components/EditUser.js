@@ -59,17 +59,17 @@ const EditUser = (props) => {
     return (
       <>
         <form onSubmit={(event) => handleEditUser(event, props.currentUser)}>
-          <label for="email">Email: </label>
+          <label htmlFor="email">Email: </label>
           <input type="text" onChange={props.changeHandlers.emailChange}/><br/>
-          <label for="firstname">First Name: </label>
+          <label htmlFor="firstname">First Name: </label>
           <input type="text" onChange={props.changeHandlers.firstChange}/><br/>
-          <label for="lastname">Last Name: </label>
+          <label htmlFor="lastname">Last Name: </label>
           <input type="text" onChange={props.changeHandlers.lastChange}/><br/>
-          <label for="pronouns">Pronouns: </label>
+          <label htmlFor="pronouns">Pronouns: </label>
           <input type="text" onChange={props.changeHandlers.pronounsChange}/><br/>
-          <label for="profilepic">Profile Picture: </label>
+          <label htmlFor="profilepic">Profile Picture: </label>
           <input type="text" onChange={props.changeHandlers.picChange}/><br/>
-          <label for="faveClass">Favorite Class: </label>
+          <label htmlFor="faveClass">Favorite Class: </label>
           <select onChange={props.changeHandlers.classChange}>
             <option value="Artificer">Artificer</option>
             <option value="Barbarian">Barbarian</option>
@@ -90,9 +90,9 @@ const EditUser = (props) => {
 
         <button onClick={toggleChangePassword}>Change Password</button>
           <form className='hidden' id='passwordForm' onSubmit={(event) => handlePasswordChange(event, props.currentUser)}>
-          <label for="password">Password: </label>
+          <label htmlFor="password">Password: </label>
             <input type="text" onChange={handleNewPassword1}/><br/>
-            <label for="password">Confirm Password: </label>
+            <label htmlFor="password">Confirm Password: </label>
             <input type="text" onChange={handleNewPassword2}/><br/>
             <input type="submit" value="Update Password"/>
             <p>{errorMessage}</p>
