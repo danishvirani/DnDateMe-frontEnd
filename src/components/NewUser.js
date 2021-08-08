@@ -12,7 +12,7 @@ const NewUser = (props) => {
           password:props.newStates.newPassword,
           firstName:props.newStates.newFirstName,
           lastName:props.newStates.newLastName,
-          pronoun:props.newStates.newPronouns,
+          pronouns:props.newStates.newPronouns,
           faveClass:props.newStates.newFaveClass
         }
       ).then(props.getUsers())
@@ -31,7 +31,7 @@ const NewUser = (props) => {
         <input type="text" onChange={props.changeHandlers.firstChange}/><br/>
         <label for="lastname">Last Name: </label>
         <input type="text" onChange={props.changeHandlers.lastChange}/><br/>
-        <label for="pronoun">Pronouns: </label>
+        <label for="pronouns">Pronouns: </label>
         <input type="text" onChange={props.changeHandlers.pronounsChange}/><br/>
         <label for="profilepic">Profile Picture: </label>
         <input type="text" onChange={props.changeHandlers.picChange}/><br/>
