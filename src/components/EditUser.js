@@ -1,4 +1,5 @@
 import React from 'react'
+import {useState} from 'react'
 import axios from 'axios'
 
 const EditUser = (props) => {
@@ -21,11 +22,11 @@ const EditUser = (props) => {
       .put(
         `https://dndateme-backend.herokuapp.com/users/${currentUser._id}`,
         {
-          email: props.newEmail ?? currentUser.email,
-          firstName: props.newFirstName ?? props.currentUser.firstName,
-          lastName: props.newLastName ?? currentUser.lastname,
-          pronouns: props.newPronouns ?? currentUser.Pronouns,
-          faveClass: props.faveClass ?? currentUser.faveClass
+          email: props.newStates.newEmail || currentUser.email,
+          firstName: props.newStates.newFirstName || currentUser.firstName,
+          lastName: props.newStates.newLastName || currentUser.lastname,
+          pronouns: props.newStates.newPronouns || currentUser.Pronouns,
+          faveClass: props.newStates.faveClass || currentUser.faveClass
         }
       ).then(props.getUsers())
       event.target.reset()
@@ -33,6 +34,7 @@ const EditUser = (props) => {
     }
 
     const handlePasswordChange = (event, currentUser) => {
+      setErrorMessage('')
       event.preventDefault()
       if ( newPassword1 === newPassword2 ) {
         axios
@@ -51,7 +53,7 @@ const EditUser = (props) => {
 
     const toggleChangePassword = () => {
       props.clearFormStates()
-      document.querySelector.classList.toogle('hidden')
+      document.querySelector('#passwordForm').classList.toggle('hidden')
     }
 
     return (
@@ -87,12 +89,13 @@ const EditUser = (props) => {
         </form><br/>
 
         <button onClick={toggleChangePassword}>Change Password</button>
-          <form className='hidden' onSubmit={(event) => handlePasswordChange(event, props.currentUser)}>
+          <form className='hidden' id='passwordForm' onSubmit={(event) => handlePasswordChange(event, props.currentUser)}>
           <label for="password">Password: </label>
             <input type="text" onChange={handleNewPassword1}/><br/>
             <label for="password">Confirm Password: </label>
             <input type="text" onChange={handleNewPassword2}/><br/>
-            <p></p>
+            <input type="submit" value="Update Password"/>
+            <p>{errorMessage}</p>
           </form>
 
       </>
