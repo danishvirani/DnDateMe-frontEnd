@@ -65,15 +65,15 @@ const EditUser = (props) => {
             handleEditUser(event, props.currentUser)
         }}>
           <label htmlFor="email">Email: </label>
-          <input type="text" onChange={props.changeHandlers.emailChange}/><br/>
+          <input type="text" onChange={props.changeHandlers.emailChange}/>
           <label htmlFor="firstname">First Name: </label>
-          <input type="text" onChange={props.changeHandlers.firstChange}/><br/>
+          <input type="text" onChange={props.changeHandlers.firstChange}/>
           <label htmlFor="lastname">Last Name: </label>
-          <input type="text" onChange={props.changeHandlers.lastChange}/><br/>
+          <input type="text" onChange={props.changeHandlers.lastChange}/>
           <label htmlFor="pronouns">Pronouns: </label>
-          <input type="text" onChange={props.changeHandlers.pronounsChange}/><br/>
+          <input type="text" onChange={props.changeHandlers.pronounsChange}/>
           <label htmlFor="profilepic">Profile Picture: </label>
-          <input type="text" onChange={props.changeHandlers.picChange}/><br/>
+          <input type="text" onChange={props.changeHandlers.picChange}/>
           <label htmlFor="faveClass">Favorite Class: </label>
           <select onChange={props.changeHandlers.classChange}>
             <option value="Artificer">Artificer</option>
@@ -96,11 +96,11 @@ const EditUser = (props) => {
         <button onClick={toggleChangePassword}>Change Password</button>
           <form className='hidden' id='passwordForm' onSubmit={(event) => handlePasswordChange(event, props.currentUser)}>
           <label htmlFor="password">Password: </label>
-            <input type="text" onChange={handleNewPassword1}/><br/>
+            <input type="text" onChange={handleNewPassword1}/>
             <label htmlFor="password">Confirm Password: </label>
-            <input type="text" onChange={handleNewPassword2}/><br/>
+            <input type="text" onChange={handleNewPassword2}/>
             <input type="submit" value="Update Password"/>
-            <p>{errorMessage}</p>
+            {errorMessage && <p>{errorMessage}</p>}
           </form>
 
       </>

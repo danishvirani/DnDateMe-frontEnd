@@ -2,6 +2,7 @@
     --black: #0c1829;
     --navy: #1d3557;
     --middleBlue: #457B9D;
+    --lightBlue:#6cabd2;
     --coolWhite: #F1FAEE;
     --strawberry: #E63946;
 }
@@ -30,6 +31,15 @@ body {
     color: var(--coolWhite);
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 98%;
+    margin: 0 1%;
+}
+
+/* Nav styling */
 nav {
     display: flex;
     align-items: center;
@@ -63,14 +73,7 @@ nav > h1 {
     color: var(--coolWhite);
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 98%;
-    margin: 0 1%;
-}
-
+/* Users index styling */
 .cardBox {
     display: flex;
     flex-wrap: wrap;
@@ -104,4 +107,41 @@ main {
 .userCard img {
     background: var(--black);
     max-width: 100%;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    background: var(--lightBlue);
+    color: var(--black);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1rem;
+}
+
+form * {
+    color: inherit;
+}
+
+form h1 {
+    margin-top: 0;
+    align-self: center;
+}
+
+input, select {
+    padding: .5em;
+    border-radius: .5em;
+    border: 1px solid var(--middleBlue);
+    margin-bottom: 1rem;
+}
+
+input[type="submit"]{
+    margin-bottom: 0;
+    font-size: 1rem;
+    width: 50%;
+    align-self: center;
+    background: var(--strawberry);
+    color: var(--coolWhite)
 }
