@@ -133,6 +133,8 @@ const App = () => {
                     clearFormStates={clearFormStates}
                     currentUser={currentUser}
                     getCurrentUser={getCurrentUser}
+                    setShowUser={setShowUser}
+                    setCurrentPage={setCurrentPage}
                 />
             }
             {currentPage === 'usersIndex' &&
