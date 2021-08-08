@@ -31,6 +31,8 @@ const EditUser = (props) => {
         ).then((response) => {
             props.getUsers()
             props.getCurrentUser(response.data._id)
+            props.setShowUser(response.data)
+            props.setCurrentPage('showUser')
         })
         event.target.reset()
         props.clearFormStates()
