@@ -28,6 +28,16 @@ const App = () => {
         newFriends:newFriends
     }
 
+    const clearFormStates = () => {
+        setNewEmail(null)
+        setNewPassword(null)
+        setNewFirstName(null)
+        setNewLastName(null)
+        setNewPronouns(null)
+        setNewProfilePic(null)
+        setNewFaveClass(null)
+    }
+
     const changeHandlers = {
         emailChange: (e) => {
             setNewEmail(e.target.value)
@@ -66,6 +76,7 @@ const App = () => {
     changeHandlers={changeHandlers}
     newStates={newStates}
     getUsers={getUsers}
+    clearFormStates={clearFormStates}
     />
     </>
   )

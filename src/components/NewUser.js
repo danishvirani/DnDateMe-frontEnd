@@ -16,6 +16,8 @@ const NewUser = (props) => {
           faveClass:props.newStates.newFaveClass
         }
       ).then(props.getUsers())
+      event.target.reset()
+      props.clearFormStates()
   }
 
   return (
