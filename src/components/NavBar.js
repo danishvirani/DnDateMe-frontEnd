@@ -3,6 +3,7 @@ import React from 'react'
 const NavBar = (props) => {
     const logOut = () => {
         props.setCurrentUser(undefined)
+        props.setCurrentPage('usersIndex')
     }
 
     return(
@@ -12,10 +13,10 @@ const NavBar = (props) => {
                 <p>Signed in as {props.currentUser.firstName}</p>
             }
             <div className="btnBox">
-                <button className="btn btn-nav" onClick={()=> props.setCurrentPage('usersIndex')}>Home</button>
+                <button className="btn btn-nav" onClick={()=> {props.setCurrentPage('usersIndex'); props.getUsers()}}>Home</button>
                 {props.currentUser ?
                     <>
-                    <button className="btn btn-nav">My Profile</button>
+                    <button className="btn btn-nav" onClick={()=>props.setCurrentPage('editUser')}>My Profile</button>
                     <button className="btn btn-nav" onClick={logOut}>Log Out</button>
                     </>:
                     <button className="btn btn-nav" onClick={()=>props.setCurrentPage('logIn')}>Log In</button>

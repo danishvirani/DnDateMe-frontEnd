@@ -4,6 +4,7 @@ import axios from 'axios'
 import './App.css'
 
 import NavBar from './components/NavBar'
+import LogIn from './components/LogIn'
 import NewUser from './components/NewUser'
 import EditUser from './components/EditUser'
 import UserCard from './components/UserCard'
@@ -94,9 +95,15 @@ const App = () => {
     return (
         <>
         <NavBar
+            getUsers={getUsers}
             currentUser={currentUser}
             setCurrentPage={setCurrentPage}
             setCurrentUser={setCurrentUser}/>
+        {currentPage === "logIn" &&
+            <LogIn
+                setCurrentPage={setCurrentPage}
+                setCurrentUser={setCurrentUser}/>
+        }
         {currentPage === 'signUp' &&
             <NewUser
                 changeHandlers={changeHandlers}
@@ -105,17 +112,22 @@ const App = () => {
                 clearFormStates={clearFormStates}
             />
         }
-        <EditUser
-            changeHandlers={changeHandlers}
-            newStates={newStates}
-            getUsers={getUsers}
-            clearFormStates={clearFormStates}
-            currentUser={currentUser}
-        />
+        {currentPage === "editUser" &&
+            <EditUser
+                changeHandlers={changeHandlers}
+                newStates={newStates}
+                getUsers={getUsers}
+                clearFormStates={clearFormStates}
+                currentUser={currentUser}
+                getCurrentUser={getCurrentUser}
+            />
+        }
         {currentPage === 'usersIndex' &&
         <div className="cardBox">
             {users.map((user, index) => {
-                return <UserCard key={index} user={user}/>
+                return <UserCard key={index}
+                    user={user}
+                    getCurrentUser={getCurrentUser}/>
             })}
         </div>
         }
