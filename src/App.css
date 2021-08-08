@@ -1,3 +1,88 @@
+:root {
+    --black: #0c1829;
+    --navy: #1d3557;
+    --middleBlue: #457B9D;
+    --coolWhite: #F1FAEE;
+    --strawberry: #E63946;
+}
+
+/* Modifying Classes */
+
 .hidden {
     display: none;
+}
+
+.caps {
+    text-transform: capitalize;
+}
+
+.upper {
+    text-transform: uppercase;
+}
+
+/* General styling */
+
+body {
+    background: var(--navy);
+}
+
+*:not(input, select, button) {
+    color: var(--coolWhite);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--black);
+    padding: .5rem;
+}
+
+nav > h1 {
+    margin: 0;
+}
+
+.btnBox {
+    display: flex;
+}
+
+.btn {
+    padding: .25em .5em;
+    border-radius: .5em;
+    font-size: 1rem;
+}
+
+.btn-nav {
+    background: var(--strawberry);
+    border-color: var(--strawberry);
+    color: var(--coolWhite);
+}
+
+.cardBox {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.userCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--middleBlue);
+    padding: .5rem;
+    border-radius: .5rem;
+    margin: .25rem;
+    box-shadow: 3px 3px 5px var(--black);
+    transition: .05s;
+    max-width: 250px;
+}
+
+.userCard:hover {
+    cursor: pointer;
+    transform: translate(3px, 3px);
+    box-shadow: none;
+}
+
+.userCard img {
+    background: var(--black);
+    max-width: 100%;
 }
