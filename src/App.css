@@ -3,19 +3,59 @@
     --navy: #1d3557;
     --middleBlue: #457B9D;
     --coolWhite: #F1FAEE;
+    --strawberry: #E63946;
+}
+
+/* Modifying Classes */
+
+.hidden {
+    display: none;
+}
+
+.caps {
+    text-transform: capitalize;
+}
+
+.upper {
+    text-transform: uppercase;
+}
+
+/* General styling */
+
+body {
+    background: var(--navy);
 }
 
 *:not(input, select, button) {
     color: var(--coolWhite);
 }
 
-body {
-    background: var(--navy);
-    padding: 10px;
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--black);
+    padding: .5rem;
 }
 
-.hidden {
-    display: none;
+nav > h1 {
+    margin: 0;
+}
+
+.btnBox {
+    display: flex;
+}
+
+.btn {
+    padding: .25em .5em;
+    border-radius: .5em;
+    font-size: 1rem;
+}
+
+.btn-nav {
+    background: var(--strawberry);
+    border-color: var(--strawberry);
+    color: var(--coolWhite);
 }
 
 .cardBox {
