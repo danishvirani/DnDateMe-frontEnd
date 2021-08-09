@@ -7,6 +7,7 @@ const EditUser = (props) => {
     let [newPassword1, setNewPassword1] = useState('')
     let [newPassword2, setNewPassword2] = useState('')
     let [errorMessage, setErrorMessage] = useState('')
+    let [passwordMessage, setPasswordMessage] = useState('')
 
     const handleNewPassword1 = (event) => {
         setNewPassword1(event.target.value)
@@ -40,19 +41,26 @@ const EditUser = (props) => {
 
     const handlePasswordChange = (event, currentUser) => {
       setErrorMessage('')
+      setPasswordMessage('')
       event.preventDefault()
-      if ( newPassword1 === newPassword2 ) {
-        axios
-          .put(
-            `https://dndateme-backend.herokuapp.com/users/${currentUser._id}`,
-            {
-              password: newPassword2
-            }
-          ).then(props.getUsers())
-          event.target.reset()
-          props.clearFormStates()
+      let pass = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+      if ( newPassword1.match(pass) ) {
+        if ( newPassword1 === newPassword2 ) {
+          axios
+            .put(
+              `https://dndateme-backend.herokuapp.com/users/${currentUser._id}`,
+              {
+                password: newPassword2
+              }
+            ).then(props.getUsers())
+            event.target.reset()
+            props.clearFormStates()
+            setPasswordMessage('Password Succesfully Changed')
+        } else {
+          setErrorMessage('Passwords Do Not Match')
+        }
       } else {
-        setErrorMessage('Passwords Do Not Match')
+        setPasswordMessage('Password must be 7 to 15 characters which contain at least one numeric digit and a special character')
       }
     }
 
@@ -67,7 +75,7 @@ const EditUser = (props) => {
             handleEditUser(event, props.currentUser)
         }}>
           <label htmlFor="email">Email: </label>
-          <input type="text" onChange={props.changeHandlers.emailChange}/>
+          <input type="email" onChange={props.changeHandlers.emailChange}/>
           <label htmlFor="firstname">First Name: </label>
           <input type="text" onChange={props.changeHandlers.firstChange}/>
           <label htmlFor="lastname">Last Name: </label>
@@ -98,9 +106,10 @@ const EditUser = (props) => {
         <button onClick={toggleChangePassword}>Change Password</button>
           <form className='hidden' id='passwordForm' onSubmit={(event) => handlePasswordChange(event, props.currentUser)}>
           <label htmlFor="password">Password: </label>
-            <input type="text" onChange={handleNewPassword1}/>
+            <input type="password" onChange={handleNewPassword1}/>
             <label htmlFor="password">Confirm Password: </label>
-            <input type="text" onChange={handleNewPassword2}/>
+            <input type="password" onChange={handleNewPassword2}/>
+            <p>{passwordMessage}</p>
             <input type="submit" value="Update Password"/>
             {errorMessage && <p>{errorMessage}</p>}
           </form>
