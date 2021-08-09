@@ -1,6 +1,39 @@
 import React from 'react'
+import {useState} from 'react'
+import axios from 'axios'
 
 const ShowUser = (props) => {
+
+  let [newRequestIds, setNewRequestIds] = useState([])
+
+    const addFriend = () => {
+      if (props.showUser.requestIds.includes(props.currentUser._id)) {
+        let requestArray = props.showUser.requestIds
+        let requestIndex = requestArray.indexOf(props.currentUser._id)
+        let removeArray = [...requestArray.slice(0, requestIndex), ...requestArray.slice(requestIndex + 1)]
+        axios
+          .put(
+            `https://dndateme-backend.herokuapp.com/users/${props.showUser._id}`,
+            {
+              requestIds:removeArray
+            }
+          ).then(props.getUsers())
+
+      } else {
+        let addArray = [...props.showUser.requestIds, props.currentUser._id]
+        if (!props.showUser.requestIds.includes(props.currentUser._id)){
+          axios
+            .put(
+              `https://dndateme-backend.herokuapp.com/users/${props.showUser._id}`,
+              {
+                requestIds:addArray
+              }
+            ).then(props.getUsers())
+
+        }
+      }
+    }
+
     return(
         <>
         <h1>{props.showUser.firstName}</h1>
@@ -47,6 +80,10 @@ const ShowUser = (props) => {
             <img src="https://www.enworld.org/data/attachments/25/25891-6f02824188749f93de050e9b18b83d3f.jpg"/>
             : <></>}
         </p>
+        <button onClick={addFriend}>{
+          (props.showUser.requestIds.includes(props.currentUser._id))? "Remove Friend" : "Add Friend"
+        }</button>
+        <br/>
         </>
     )
 }

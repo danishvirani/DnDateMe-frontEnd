@@ -153,7 +153,8 @@ const App = () => {
             {currentPage === "showUser" &&
                 <ShowUser
                     showUser={showUser}
-                    currentUser={currentUser}/>
+                    currentUser={currentUser}
+                    getUsers={getUsers}/>
             }
         </main>
         </>
