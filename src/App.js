@@ -24,12 +24,12 @@ const App = () => {
 
 
     let [users, setUsers] = useState([])
-    let [currentUser, setCurrentUser] = useState({})
+    let [currentUser, setCurrentUser] = useState(undefined)
     let [showUser, setShowUser] = useState({})
     let [currentPage, setCurrentPage] = useState('usersIndex')
 
     useEffect(() => {
-        getCurrentUser('610dae1157fdeb0015d073cf')
+        getSessionUser()
         getUsers()
     },[])
 
@@ -103,6 +103,18 @@ const App = () => {
             })
     }
 
+    const getSessionUser = () => {
+        // console.log('test')
+        axios
+            .get('http://dndateme-backend.herokuapp.com/sessions/')
+            .then((response) => {
+                console.log(response)
+                // if (response){
+                //     setCurrentUser(response.data)
+                // }
+            })
+    }
+
     return (
         <>
         <NavBar
@@ -112,6 +124,7 @@ const App = () => {
             setCurrentUser={setCurrentUser}
             handleShowUser={handleShowUser}/>
         <main>
+            <button onClick={getSessionUser}>Test</button>
             {currentPage === "logIn" &&
                 <LogIn
                     setCurrentPage={setCurrentPage}
@@ -144,7 +157,6 @@ const App = () => {
                     {users.map((user, index) => {
                         return <UserCard key={index}
                             user={user}
-                            getCurrentUser={getCurrentUser}
                             handleShowUser={handleShowUser}/>
                     })}
                 </div>
@@ -153,7 +165,8 @@ const App = () => {
             {currentPage === "showUser" &&
                 <ShowUser
                     showUser={showUser}
-                    currentUser={currentUser}/>
+                    currentUser={currentUser}
+                    getUsers={getUsers}/>
             }
         </main>
         </>
