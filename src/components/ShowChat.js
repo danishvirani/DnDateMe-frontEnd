@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 
+import './ShowChat.css'
+
 const ShowChat = (props) => {
 
     let [newMessageBody, setNewMessageBody] = useState('')
@@ -28,7 +30,7 @@ const ShowChat = (props) => {
         <div className="chatBox">
             {props.chat.messages.map((message,index) => {
                 return(
-                    <div className="message">
+                    <div className={message.senderId === props.currentUser._id.toString() ? "message myMessage" : "message"}>
                         <p className="messageName">{message.senderName}</p>
                         <p className="messageBody">{message.body}</p>
                     </div>
