@@ -1,10 +1,16 @@
 import React from 'react'
+import {useState} from 'react'
 import axios from 'axios'
 
 const NewUser = (props) => {
 
+  let [errorMessage, setErrorMessage] = useState('')
+
   const handleNewUserCreation = (event) => {
     event.preventDefault()
+    setErrorMessage(null)
+    let pass = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+    if (props.newStates.newPassword.match(pass)){
       axios.post(
         'https://dndateme-backend.herokuapp.com/users',
         {
@@ -18,6 +24,9 @@ const NewUser = (props) => {
       ).then(props.getUsers())
       event.target.reset()
       props.clearFormStates()
+    } else {
+      setErrorMessage('Please Choose A Stronger Password')
+    }
   }
 
   return (
@@ -25,9 +34,11 @@ const NewUser = (props) => {
       <form onSubmit={handleNewUserCreation}>
         <h1>Sign Up</h1>
         <label htmlFor="email">Email: </label>
-        <input type="text" onChange={props.changeHandlers.emailChange}/>
+        <input type="email" onChange={props.changeHandlers.emailChange}/>
         <label htmlFor="password">Password: </label>
-        <input type="text" onChange={props.changeHandlers.passwordChange}/>
+        <input type="password" onChange={props.changeHandlers.passwordChange}/>
+        <p>Password must be 7 to 15 characters which contain at least one numeric digit and a special character</p>
+        <p>{errorMessage}</p>
         <label htmlFor="firstname">First Name: </label>
         <input type="text" onChange={props.changeHandlers.firstChange}/>
         <label htmlFor="lastname">Last Name: </label>
