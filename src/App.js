@@ -106,7 +106,7 @@ const App = () => {
     const getSessionUser = () => {
         // console.log('test')
         axios
-            .get('http://dndateme-backend.herokuapp.com/sessions/')
+            .get('https://dndateme-backend.herokuapp.com/sessions/')
             .then((response) => {
                 console.log(response)
                 // if (response){

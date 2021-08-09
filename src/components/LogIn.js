@@ -10,7 +10,7 @@ const LogIn = (props) => {
         e.preventDefault()
         setErrorMessage(null)
         axios
-            .post('http://dndateme-backend.herokuapp.com/sessions',
+            .post('https://dndateme-backend.herokuapp.com/sessions',
             {
                 email: logInEmail,
                 password: logInPassword
