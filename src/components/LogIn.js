@@ -21,6 +21,7 @@ const LogIn = (props) => {
                 } else {
                     props.setCurrentUser(response.data)
                     props.setCurrentPage('usersIndex')
+                    props.getMyChats(response.data._id)
                 }
             })
     }
