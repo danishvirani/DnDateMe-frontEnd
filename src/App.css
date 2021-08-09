@@ -1,38 +1,147 @@
-.App {
-  text-align: center;
+:root {
+    --black: #0c1829;
+    --navy: #1d3557;
+    --middleBlue: #457B9D;
+    --lightBlue:#6cabd2;
+    --coolWhite: #F1FAEE;
+    --strawberry: #E63946;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Modifying Classes */
+
+.hidden {
+    display: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.caps {
+    text-transform: capitalize;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.upper {
+    text-transform: uppercase;
 }
 
-.App-link {
-  color: #61dafb;
+/* General styling */
+
+body {
+    background: var(--navy);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+*:not(input, select, button) {
+    color: var(--coolWhite);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 98%;
+    margin: 0 1%;
+}
+
+/* Nav styling */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--black);
+    padding: .5rem;
+}
+
+nav > h1 {
+    margin: 0;
+}
+
+.btnBox {
+    display: flex;
+    align-items: center;
+}
+
+.btnBox * {
+    margin: 0 .2rem;
+}
+
+.btn {
+    padding: .25em .5em;
+    border-radius: .5em;
+    font-size: 1rem;
+}
+
+.btn-nav {
+    background: var(--strawberry);
+    border-color: var(--strawberry);
+    color: var(--coolWhite);
+}
+
+/* Users index styling */
+.cardBox {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.userCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--middleBlue);
+    padding: .5rem;
+    border-radius: .5rem;
+    margin: .25rem;
+    box-shadow: 3px 3px 5px var(--black);
+    transition: .05s;
+    max-width: 250px;
+}
+
+.userCard:hover {
+    cursor: pointer;
+    transform: translate(3px, 3px);
+    box-shadow: none;
+}
+
+.userCard *:not(img) {
+    margin-top:.5rem;
+    margin-bottom: 0;
+}
+
+.userCard img {
+    background: var(--black);
+    max-width: 100%;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    background: var(--lightBlue);
+    color: var(--black);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1rem;
+}
+
+form * {
+    color: inherit;
+}
+
+form h1 {
+    margin-top: 0;
+    align-self: center;
+}
+
+input, select {
+    padding: .5em;
+    border-radius: .5em;
+    border: 1px solid var(--middleBlue);
+    margin-bottom: 1rem;
+}
+
+input[type="submit"]{
+    margin-bottom: 0;
+    font-size: 1rem;
+    width: 50%;
+    align-self: center;
+    background: var(--strawberry);
+    color: var(--coolWhite)
 }
