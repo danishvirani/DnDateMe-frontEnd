@@ -132,7 +132,8 @@ const App = () => {
             currentUser={currentUser}
             setCurrentPage={setCurrentPage}
             setCurrentUser={setCurrentUser}
-            handleShowUser={handleShowUser}/>
+            handleShowUser={handleShowUser}
+            setMyChats={setMyChats}/>
         <main>
         {myChats &&
             <ShowChat
