@@ -1,0 +1,21 @@
+.chatManager {
+    position: sticky;
+    left: calc(100vw - 250px);
+    bottom: 0;
+    width: 250px;
+    background: var(--middleBlue);
+    border-top-left-radius: 5px;
+    border: 1px solid var(--navy);
+    border-right: none;
+}
+
+.btn-chat {
+    color: var(--coolWhite);
+    width: 100%;
+}
+
+#chatManagerWindow {
+    max-height: 400px;
+    background: var(--lightBlue);
+    border-top-left-radius: 5px;
+}

@@ -12,7 +12,7 @@ import UserCard from './components/UserCard'
 import ShowUser from './components/ShowUser'
 import UserProfile from './components/UserProfile'
 import Banner from './components/Banner'
-
+import ChatFooter from './components/ChatFooter'
 import ShowChat from './components/ShowChat'
 
 const App = () => {
@@ -141,13 +141,6 @@ const App = () => {
             handleShowUser={handleShowUser}
             setMyChats={setMyChats}/>
         <main>
-        {myChats &&
-            <ShowChat
-                chat={myChats[0]}
-                getMyChats={getMyChats}
-                currentUser={currentUser}
-                />
-        }
             <button onClick={getSessionUser}>Test</button>
             {currentPage === "logIn" &&
                 <LogIn
@@ -201,6 +194,13 @@ const App = () => {
                     getUsers={getUsers}/>
             }
         </main>
+        {currentUser &&
+            <ChatFooter
+                currentUser={currentUser}
+                getMyChats={getMyChats}
+                myChats={myChats}/>
+        }
+
         </>
     )
 }

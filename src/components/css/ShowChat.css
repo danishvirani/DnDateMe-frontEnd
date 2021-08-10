@@ -3,14 +3,22 @@
 .chatBox {
     display: flex;
     flex-direction: column;
-    background: var(--lightBlue);
     padding: .5em;
     border-radius: .5em;
+    height: 400px;
+    padding-right: 0;
+}
+
+.chatBody {
+    display: flex;
+    flex-direction: column;
+    overflow-y:scroll;
 }
 
 .message {
     background: var(--coolWhite);
     padding: .5em;
+    padding-top: 0;
     border-radius: .5em;
     max-width: 80%;
     margin-bottom: .5em;
@@ -37,16 +45,27 @@
     margin-bottom: .5em;
 }
 
+.messageBody {
+    font-size: .9em;
+}
+
 .chatBox > form {
-    width: 90%;
+    width: 100%;
     margin: 0;
     padding: 0;
     align-self: center;
 }
 
 .chatBox textarea {
-    height: 5em;
+    height: 3em;
     background: var(--coolWhite);
     border: 1px solid var(--middleBlue);
     margin-bottom: .25em;
+}
+
+.btn-back {
+    background: var(--navy);
+    align-self: flex-start;
+    color: var(--coolWhite);
+    font-size: .75em;
 }
