@@ -9,6 +9,8 @@ import NewUser from './components/NewUser'
 import EditUser from './components/EditUser'
 import UserCard from './components/UserCard'
 import ShowUser from './components/ShowUser'
+import UserProfile from './components/UserProfile'
+import Banner from './components/Banner'
 
 const App = () => {
 
@@ -117,6 +119,7 @@ const App = () => {
 
     return (
         <>
+        <Banner />
         <NavBar
             getUsers={getUsers}
             currentUser={currentUser}
@@ -139,6 +142,7 @@ const App = () => {
                 />
             }
             {currentPage === "editUser" &&
+                <>
                 <EditUser
                     changeHandlers={changeHandlers}
                     newStates={newStates}
@@ -149,6 +153,12 @@ const App = () => {
                     setShowUser={setShowUser}
                     setCurrentPage={setCurrentPage}
                 />
+                <UserProfile
+                    currentUser={currentUser}
+                    getUsers={getUsers}
+                    users={users}
+                />
+                </>
             }
             {currentPage === 'usersIndex' &&
                 <>

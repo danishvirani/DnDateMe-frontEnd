@@ -145,3 +145,10 @@ input[type="submit"]{
     background: var(--strawberry);
     color: var(--coolWhite)
 }
+
+/* Banner  */
+
+.banner {
+  max-width: 100%;
+  height: auto;
+}
