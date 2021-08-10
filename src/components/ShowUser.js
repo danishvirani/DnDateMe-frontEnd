@@ -83,7 +83,7 @@ const ShowUser = (props) => {
         {(props.currentUser._id == props.showUser._id)?
         <></>
         :<button onClick={addFriend}>{
-          (props.showUser.requestIds.includes(props.currentUser._id))? '' : "Add Friend"
+          (props.showUser.requestIds.includes(props.currentUser._id || props.showUser.friendIds.includes(props.currentUser._id)))? '' : "Add Friend"
         }</button>}
         <br/>
         </>

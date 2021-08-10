@@ -14,6 +14,7 @@ const NavBar = (props) => {
                     <p>Signed in as {props.currentUser.firstName}</p>
                 }
                 <button className="btn btn-nav" onClick={()=> {props.setCurrentPage('usersIndex'); props.getUsers()}}>Home</button>
+                <button className="btn btn-nav" onClick={()=> {props.setCurrentPage('groupsIndex')}}>Groups</button>
                 {props.currentUser ?
                     <>
                     <button className="btn btn-nav" onClick={()=>props.setCurrentPage('editUser')}>My Profile</button>
