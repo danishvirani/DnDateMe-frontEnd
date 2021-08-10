@@ -12,13 +12,11 @@ import UserCard from './components/UserCard'
 import ShowUser from './components/ShowUser'
 import UserProfile from './components/UserProfile'
 import Banner from './components/Banner'
-<<<<<<< HEAD
 import GroupCard from './components/GroupCard'
 import ShowGroup from './components/ShowGroup'
-=======
 import ChatFooter from './components/ChatFooter'
 import ShowChat from './components/ShowChat'
->>>>>>> ffe0555e9d9fe25a2f4642ffb821aff07b8c05be
+
 
 const App = () => {
 
@@ -100,19 +98,20 @@ const App = () => {
             })
     }
 
-<<<<<<< HEAD
+
     const getGroups = () => {
         axios
             .get('https://dndateme-backend.herokuapp.com/groups')
             .then((response) => {
                 setGroups(response.data)
-=======
+            })   
+    }
+
     const getMyChats = (id) => {
         axios
             .get(`https://dndateme-backend.herokuapp.com/chats/byUser/${id}`)
             .then((response) => {
                 setMyChats(response.data)
->>>>>>> ffe0555e9d9fe25a2f4642ffb821aff07b8c05be
             })
     }
 
