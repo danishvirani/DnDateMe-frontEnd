@@ -4,6 +4,7 @@ const NavBar = (props) => {
     const logOut = () => {
         props.setCurrentUser(undefined)
         props.setCurrentPage('usersIndex')
+        props.setMyChats(undefined)
     }
 
     return(

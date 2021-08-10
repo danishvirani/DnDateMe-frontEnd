@@ -12,6 +12,8 @@ import ShowUser from './components/ShowUser'
 import UserProfile from './components/UserProfile'
 import Banner from './components/Banner'
 
+import ShowChat from './components/ShowChat'
+
 const App = () => {
 
     // New/edit form states
@@ -29,6 +31,7 @@ const App = () => {
     let [currentUser, setCurrentUser] = useState(undefined)
     let [showUser, setShowUser] = useState({})
     let [currentPage, setCurrentPage] = useState('usersIndex')
+    let [myChats, setMyChats] = useState(undefined)
 
     useEffect(() => {
         getSessionUser()
@@ -88,6 +91,14 @@ const App = () => {
             })
     }
 
+    const getMyChats = (id) => {
+        axios
+            .get(`https://dndateme-backend.herokuapp.com/chats/byUser/${id}`)
+            .then((response) => {
+                setMyChats(response.data)
+            })
+    }
+
     const getCurrentUser = (id) => {
         axios
             .get(`https://dndateme-backend.herokuapp.com/users/${id}`)
@@ -108,9 +119,9 @@ const App = () => {
     const getSessionUser = () => {
         // console.log('test')
         axios
-            .get('http://dndateme-backend.herokuapp.com/sessions/')
+            .get('https://dndateme-backend.herokuapp.com/sessions/')
             .then((response) => {
-                console.log(response)
+                // console.log(response)
                 // if (response){
                 //     setCurrentUser(response.data)
                 // }
@@ -125,13 +136,22 @@ const App = () => {
             currentUser={currentUser}
             setCurrentPage={setCurrentPage}
             setCurrentUser={setCurrentUser}
-            handleShowUser={handleShowUser}/>
+            handleShowUser={handleShowUser}
+            setMyChats={setMyChats}/>
         <main>
+        {myChats &&
+            <ShowChat
+                chat={myChats[0]}
+                getMyChats={getMyChats}
+                currentUser={currentUser}
+                />
+        }
             <button onClick={getSessionUser}>Test</button>
             {currentPage === "logIn" &&
                 <LogIn
                     setCurrentPage={setCurrentPage}
-                    setCurrentUser={setCurrentUser}/>
+                    setCurrentUser={setCurrentUser}
+                    getMyChats={getMyChats}/>
             }
             {currentPage === 'signUp' &&
                 <NewUser
