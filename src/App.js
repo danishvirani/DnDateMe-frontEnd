@@ -178,6 +178,7 @@ const App = () => {
                     newStates={newStates}
                     getUsers={getUsers}
                     clearFormStates={clearFormStates}
+                    setCurrentPage={setCurrentPage}
                 />
             }
             {currentPage === "editUser" &&

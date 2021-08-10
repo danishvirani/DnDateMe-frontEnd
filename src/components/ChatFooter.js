@@ -28,7 +28,7 @@ const ChatFooter = (props) => {
 
     return (
         <div className="chatManager">
-            <div id="chatManagerWindow">
+            <div id="chatManagerWindow" className="hidden">
             {!currentChat && props.myChats &&
                 <>
                 {props.myChats.map((chat,index) =>{

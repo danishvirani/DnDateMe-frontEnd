@@ -19,11 +19,13 @@ const NewUser = (props) => {
           firstName:props.newStates.newFirstName,
           lastName:props.newStates.newLastName,
           pronouns:props.newStates.newPronouns,
-          faveClass:props.newStates.newFaveClass
+          faveClass:props.newStates.newFaveClass,
+          profileImg:props.newStates.newProfilePic || 'https://i.imgur.com/pIYMngN.png'
         }
       ).then(props.getUsers())
       event.target.reset()
       props.clearFormStates()
+      props.setCurrentPage('usersIndex')
     } else {
       setErrorMessage('Please Choose A Stronger Password')
     }
