@@ -1,6 +1,7 @@
 
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 import NavBar from './components/NavBar'
@@ -119,12 +120,13 @@ const App = () => {
     const getSessionUser = () => {
         // console.log('test')
         axios
-            .get('https://dndateme-backend.herokuapp.com/sessions/')
+            // .get('https://dndateme-backend.herokuapp.com/sessions/')
+            .get('http://localhost:3000/sessions/')
             .then((response) => {
-                // console.log(response)
-                // if (response){
-                //     setCurrentUser(response.data)
-                // }
+                console.log(response)
+                if (response.data.currentUser){
+                    setCurrentUser(response.data.currentUser)
+                }
             })
     }
 
