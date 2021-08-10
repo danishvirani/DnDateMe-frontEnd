@@ -1,0 +1,71 @@
+
+/* Chat styling */
+.chatBox {
+    display: flex;
+    flex-direction: column;
+    padding: .5em;
+    border-radius: .5em;
+    height: 400px;
+    padding-right: 0;
+}
+
+.chatBody {
+    display: flex;
+    flex-direction: column;
+    overflow-y:scroll;
+}
+
+.message {
+    background: var(--coolWhite);
+    padding: .5em;
+    padding-top: 0;
+    border-radius: .5em;
+    max-width: 80%;
+    margin-bottom: .5em;
+    border: 1px solid var(--middleBlue)
+}
+
+.message:not(.myMessage) {
+    border-bottom-left-radius: 0;
+}
+
+.myMessage {
+    align-self: flex-end;
+    text-align: right;
+    border-bottom-right-radius: 0;
+}
+
+.message > * {
+    color: var(--black);
+    margin: 0;
+}
+
+.messageName {
+    font-size: .75em;
+    margin-bottom: .5em;
+}
+
+.messageBody {
+    font-size: .9em;
+}
+
+.chatBox > form {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    align-self: center;
+}
+
+.chatBox textarea {
+    height: 3em;
+    background: var(--coolWhite);
+    border: 1px solid var(--middleBlue);
+    margin-bottom: .25em;
+}
+
+.btn-back {
+    background: var(--navy);
+    align-self: flex-start;
+    color: var(--coolWhite);
+    font-size: .75em;
+}

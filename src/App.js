@@ -1,6 +1,7 @@
 
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 import NavBar from './components/NavBar'
@@ -11,8 +12,13 @@ import UserCard from './components/UserCard'
 import ShowUser from './components/ShowUser'
 import UserProfile from './components/UserProfile'
 import Banner from './components/Banner'
+<<<<<<< HEAD
 import GroupCard from './components/GroupCard'
 import ShowGroup from './components/ShowGroup'
+=======
+import ChatFooter from './components/ChatFooter'
+import ShowChat from './components/ShowChat'
+>>>>>>> ffe0555e9d9fe25a2f4642ffb821aff07b8c05be
 
 const App = () => {
 
@@ -33,6 +39,7 @@ const App = () => {
     let [groups, setGroups] = useState([])
     let [showGroup, setShowGroup] = useState({})
     let [currentPage, setCurrentPage] = useState('usersIndex')
+    let [myChats, setMyChats] = useState(undefined)
 
     useEffect(() => {
         getSessionUser()
@@ -93,11 +100,19 @@ const App = () => {
             })
     }
 
+<<<<<<< HEAD
     const getGroups = () => {
         axios
             .get('https://dndateme-backend.herokuapp.com/groups')
             .then((response) => {
                 setGroups(response.data)
+=======
+    const getMyChats = (id) => {
+        axios
+            .get(`https://dndateme-backend.herokuapp.com/chats/byUser/${id}`)
+            .then((response) => {
+                setMyChats(response.data)
+>>>>>>> ffe0555e9d9fe25a2f4642ffb821aff07b8c05be
             })
     }
 
@@ -130,12 +145,13 @@ const App = () => {
     const getSessionUser = () => {
         // console.log('test')
         axios
-            .get('http://dndateme-backend.herokuapp.com/sessions/')
+            // .get('https://dndateme-backend.herokuapp.com/sessions/')
+            .get('http://localhost:3000/sessions/')
             .then((response) => {
                 console.log(response)
-                // if (response){
-                //     setCurrentUser(response.data)
-                // }
+                if (response.data.currentUser){
+                    setCurrentUser(response.data.currentUser)
+                }
             })
     }
 
@@ -147,13 +163,15 @@ const App = () => {
             currentUser={currentUser}
             setCurrentPage={setCurrentPage}
             setCurrentUser={setCurrentUser}
-            handleShowUser={handleShowUser}/>
+            handleShowUser={handleShowUser}
+            setMyChats={setMyChats}/>
         <main>
             <button onClick={getSessionUser}>Test</button>
             {currentPage === "logIn" &&
                 <LogIn
                     setCurrentPage={setCurrentPage}
-                    setCurrentUser={setCurrentUser}/>
+                    setCurrentUser={setCurrentUser}
+                    getMyChats={getMyChats}/>
             }
             {currentPage === 'signUp' &&
                 <NewUser
@@ -221,6 +239,13 @@ const App = () => {
                     getUsers={getUsers}/>
             }
         </main>
+        {currentUser &&
+            <ChatFooter
+                currentUser={currentUser}
+                getMyChats={getMyChats}
+                myChats={myChats}/>
+        }
+
         </>
     )
 }
