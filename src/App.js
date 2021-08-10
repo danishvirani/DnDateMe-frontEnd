@@ -1,6 +1,7 @@
 
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 import NavBar from './components/NavBar'
@@ -9,7 +10,15 @@ import NewUser from './components/NewUser'
 import EditUser from './components/EditUser'
 import UserCard from './components/UserCard'
 import ShowUser from './components/ShowUser'
+import UserProfile from './components/UserProfile'
+import Banner from './components/Banner'
+<<<<<<< HEAD
+import GroupCard from './components/GroupCard'
+import ShowGroup from './components/ShowGroup'
+=======
+import ChatFooter from './components/ChatFooter'
 import ShowChat from './components/ShowChat'
+>>>>>>> ffe0555e9d9fe25a2f4642ffb821aff07b8c05be
 
 const App = () => {
 
@@ -27,12 +36,15 @@ const App = () => {
     let [users, setUsers] = useState([])
     let [currentUser, setCurrentUser] = useState(undefined)
     let [showUser, setShowUser] = useState({})
+    let [groups, setGroups] = useState([])
+    let [showGroup, setShowGroup] = useState({})
     let [currentPage, setCurrentPage] = useState('usersIndex')
     let [myChats, setMyChats] = useState(undefined)
 
     useEffect(() => {
         getSessionUser()
         getUsers()
+        getGroups()
     },[])
 
     let newStates = {
@@ -88,11 +100,19 @@ const App = () => {
             })
     }
 
+<<<<<<< HEAD
+    const getGroups = () => {
+        axios
+            .get('https://dndateme-backend.herokuapp.com/groups')
+            .then((response) => {
+                setGroups(response.data)
+=======
     const getMyChats = (id) => {
         axios
             .get(`https://dndateme-backend.herokuapp.com/chats/byUser/${id}`)
             .then((response) => {
                 setMyChats(response.data)
+>>>>>>> ffe0555e9d9fe25a2f4642ffb821aff07b8c05be
             })
     }
 
@@ -113,20 +133,31 @@ const App = () => {
             })
     }
 
+    const handleShowGroup = (id) => {
+        axios
+            .get(`https://dndateme-backend.herokuapp.com/groups/${id}`)
+            .then((response) => {
+                setShowGroup(response.data)
+                setCurrentPage('showGroup')
+            })
+    }
+
     const getSessionUser = () => {
         // console.log('test')
         axios
-            .get('https://dndateme-backend.herokuapp.com/sessions/')
+            // .get('https://dndateme-backend.herokuapp.com/sessions/')
+            .get('http://localhost:3000/sessions/')
             .then((response) => {
-                // console.log(response)
-                // if (response){
-                //     setCurrentUser(response.data)
-                // }
+                console.log(response)
+                if (response.data.currentUser){
+                    setCurrentUser(response.data.currentUser)
+                }
             })
     }
 
     return (
         <>
+        <Banner />
         <NavBar
             getUsers={getUsers}
             currentUser={currentUser}
@@ -135,13 +166,6 @@ const App = () => {
             handleShowUser={handleShowUser}
             setMyChats={setMyChats}/>
         <main>
-        {myChats &&
-            <ShowChat
-                chat={myChats[0]}
-                getMyChats={getMyChats}
-                currentUser={currentUser}
-                />
-        }
             <button onClick={getSessionUser}>Test</button>
             {currentPage === "logIn" &&
                 <LogIn
@@ -158,6 +182,7 @@ const App = () => {
                 />
             }
             {currentPage === "editUser" &&
+                <>
                 <EditUser
                     changeHandlers={changeHandlers}
                     newStates={newStates}
@@ -168,6 +193,13 @@ const App = () => {
                     setShowUser={setShowUser}
                     setCurrentPage={setCurrentPage}
                 />
+                <UserProfile
+                    currentUser={currentUser}
+                    getUsers={getUsers}
+                    users={users}
+                    getCurrentUser={getCurrentUser}
+                />
+                </>
             }
             {currentPage === 'usersIndex' &&
                 <>
@@ -187,7 +219,33 @@ const App = () => {
                     currentUser={currentUser}
                     getUsers={getUsers}/>
             }
+            {currentPage === 'groupsIndex' &&
+                <>
+                <h1>All Groups</h1>
+                <div className="cardBox">
+                    {groups.map((group, index) => {
+                        return <GroupCard key={index}
+                            group={group}
+                            handleShowGroup={handleShowGroup}/>
+                    })}
+                </div>
+                </>
+            }
+            {currentPage === "showGroup" &&
+                <ShowGroup
+                    showGroup={showGroup}
+                    currentUser={currentUser}
+                    getGroups={getGroups}
+                    getUsers={getUsers}/>
+            }
         </main>
+        {currentUser &&
+            <ChatFooter
+                currentUser={currentUser}
+                getMyChats={getMyChats}
+                myChats={myChats}/>
+        }
+
         </>
     )
 }

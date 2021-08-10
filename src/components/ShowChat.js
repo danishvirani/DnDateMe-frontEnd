@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 
-import './ShowChat.css'
+import './css/ShowChat.css'
 
 const ShowChat = (props) => {
 
@@ -9,6 +9,13 @@ const ShowChat = (props) => {
 
     const handleMessageBody = (e) => {
         setNewMessageBody(e.target.value)
+    }
+
+    const setCurrentChatById = (chatId) => {
+        axios.get(`https://dndateme-backend.herokuapp.com/chats/${chatId}`)
+            .then((response) => {
+                props.setCurrentChat(response.data)
+            })
     }
 
     const sendMessage = (e,chatId) => {
@@ -22,12 +29,15 @@ const ShowChat = (props) => {
             })
             .then((response) => {
                 props.getMyChats(props.currentUser._id)
+                setCurrentChatById(chatId)
             })
         e.target.reset()
     }
 
     return(
         <div className="chatBox">
+            <button className="btn btn-back" onClick={()=>props.setCurrentChat(undefined)}>Back</button>
+            <div className="chatBody">
             {props.chat.messages.map((message,index) => {
                 return(
                     <div className={message.senderId === props.currentUser._id.toString() ? "message myMessage" : "message"}>
@@ -36,10 +46,12 @@ const ShowChat = (props) => {
                     </div>
                 )
             })}
+            </div>
             <form onSubmit={(e)=>sendMessage(e,props.chat._id)}>
                 <textarea onChange={(e)=>handleMessageBody(e)} />
                 <input type="submit" value="send" />
             </form>
+
         </div>
     )
 }
