@@ -80,9 +80,11 @@ const ShowUser = (props) => {
             <img src="https://www.enworld.org/data/attachments/25/25891-6f02824188749f93de050e9b18b83d3f.jpg" alt="Wizard"/>
             : <></>}
         </p>
-        <button onClick={addFriend}>{
-          (props.showUser.requestIds.includes(props.currentUser._id))? "Remove Friend" : "Add Friend"
-        }</button>
+        {(props.currentUser._id == props.showUser._id)?
+        <></>
+        :<button onClick={addFriend}>{
+          (props.showUser.requestIds.includes(props.currentUser._id))? '' : "Add Friend"
+        }</button>}
         <br/>
         </>
     )
