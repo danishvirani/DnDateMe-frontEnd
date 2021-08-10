@@ -39,6 +39,13 @@ main {
     margin: 0 1%;
 }
 
+/* Banner  */
+
+.banner {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Nav styling */
 nav {
     display: flex;
@@ -144,11 +151,4 @@ input[type="submit"]{
     align-self: center;
     background: var(--strawberry);
     color: var(--coolWhite)
-}
-
-/* Banner  */
-
-.banner {
-  max-width: 100%;
-  height: auto;
 }

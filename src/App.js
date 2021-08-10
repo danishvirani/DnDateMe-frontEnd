@@ -1,6 +1,7 @@
 
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 import NavBar from './components/NavBar'
@@ -11,7 +12,7 @@ import UserCard from './components/UserCard'
 import ShowUser from './components/ShowUser'
 import UserProfile from './components/UserProfile'
 import Banner from './components/Banner'
-
+import ChatFooter from './components/ChatFooter'
 import ShowChat from './components/ShowChat'
 
 const App = () => {
@@ -119,12 +120,13 @@ const App = () => {
     const getSessionUser = () => {
         // console.log('test')
         axios
-            .get('https://dndateme-backend.herokuapp.com/sessions/')
+            // .get('https://dndateme-backend.herokuapp.com/sessions/')
+            .get('http://localhost:3000/sessions/')
             .then((response) => {
-                // console.log(response)
-                // if (response){
-                //     setCurrentUser(response.data)
-                // }
+                console.log(response)
+                if (response.data.currentUser){
+                    setCurrentUser(response.data.currentUser)
+                }
             })
     }
 
@@ -139,13 +141,6 @@ const App = () => {
             handleShowUser={handleShowUser}
             setMyChats={setMyChats}/>
         <main>
-        {myChats &&
-            <ShowChat
-                chat={myChats[0]}
-                getMyChats={getMyChats}
-                currentUser={currentUser}
-                />
-        }
             <button onClick={getSessionUser}>Test</button>
             {currentPage === "logIn" &&
                 <LogIn
@@ -199,6 +194,13 @@ const App = () => {
                     getUsers={getUsers}/>
             }
         </main>
+        {currentUser &&
+            <ChatFooter
+                currentUser={currentUser}
+                getMyChats={getMyChats}
+                myChats={myChats}/>
+        }
+
         </>
     )
 }
