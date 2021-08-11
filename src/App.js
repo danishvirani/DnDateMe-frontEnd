@@ -16,7 +16,8 @@ import GroupCard from './components/GroupCard'
 import ShowGroup from './components/ShowGroup'
 import ChatFooter from './components/ChatFooter'
 import ShowChat from './components/ShowChat'
-
+import NewGroup from './components/NewGroup'
+import EditGroup from './components/EditGroup'
 
 const App = () => {
 
@@ -57,13 +58,13 @@ const App = () => {
     }
 
     const clearFormStates = () => {
-        setNewEmail(null)
-        setNewPassword(null)
-        setNewFirstName(null)
-        setNewLastName(null)
-        setNewPronouns(null)
-        setNewProfilePic(null)
-        setNewFaveClass(null)
+        setNewEmail("")
+        setNewPassword("")
+        setNewFirstName("")
+        setNewLastName("")
+        setNewPronouns("")
+        setNewProfilePic("")
+        setNewFaveClass([])
     }
 
     const changeHandlers = {
@@ -104,7 +105,7 @@ const App = () => {
             .get('https://dndateme-backend.herokuapp.com/groups')
             .then((response) => {
                 setGroups(response.data)
-            })   
+            })
     }
 
     const getMyChats = (id) => {
@@ -216,11 +217,14 @@ const App = () => {
             {currentPage === "showUser" &&
                 <ShowUser
                     showUser={showUser}
+                    setShowUser={setShowUser}
                     currentUser={currentUser}
+                    getCurrentUser={getCurrentUser}
                     getUsers={getUsers}/>
             }
             {currentPage === 'groupsIndex' &&
                 <>
+                {getGroups()}
                 <h1>All Groups</h1>
                 <div className="cardBox">
                     {groups.map((group, index) => {
@@ -237,6 +241,11 @@ const App = () => {
                     currentUser={currentUser}
                     getGroups={getGroups}
                     getUsers={getUsers}/>
+            }
+            {currentPage === "newGroup" &&
+                <NewGroup
+                    currentUser={currentUser}
+                    setCurrentPage={setCurrentPage}/>
             }
         </main>
         {currentUser &&
