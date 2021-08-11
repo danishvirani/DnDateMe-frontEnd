@@ -166,7 +166,6 @@ const App = () => {
             handleShowUser={handleShowUser}
             setMyChats={setMyChats}/>
         <main>
-            <button onClick={getSessionUser}>Test</button>
             {currentPage === "logIn" &&
                 <LogIn
                     setCurrentPage={setCurrentPage}
