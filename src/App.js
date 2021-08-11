@@ -183,7 +183,6 @@ const App = () => {
                 />
             }
             {currentPage === "editUser" &&
-                <>
                 <EditUser
                     changeHandlers={changeHandlers}
                     newStates={newStates}
@@ -194,13 +193,14 @@ const App = () => {
                     setShowUser={setShowUser}
                     setCurrentPage={setCurrentPage}
                 />
+            }
+            {currentPage === "myProfile" &&
                 <UserProfile
                     currentUser={currentUser}
                     getUsers={getUsers}
                     users={users}
                     getCurrentUser={getCurrentUser}
                 />
-                </>
             }
             {currentPage === 'usersIndex' &&
                 <>
@@ -220,7 +220,9 @@ const App = () => {
                     setShowUser={setShowUser}
                     currentUser={currentUser}
                     getCurrentUser={getCurrentUser}
-                    getUsers={getUsers}/>
+                    getUsers={getUsers}
+                    users={users}
+                />
             }
             {currentPage === 'groupsIndex' &&
                 <>
@@ -240,7 +242,9 @@ const App = () => {
                     showGroup={showGroup}
                     currentUser={currentUser}
                     getGroups={getGroups}
-                    getUsers={getUsers}/>
+                    getUsers={getUsers}
+                    users={users}
+                />
             }
             {currentPage === "newGroup" &&
                 <NewGroup

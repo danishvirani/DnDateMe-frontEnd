@@ -50,7 +50,7 @@ const ShowUser = (props) => {
             senderId:props.currentUser._id,
             receiverId:showUser._id
           }
-        ).then(refreshUser())
+        ).then(()=>refreshUser())
     }
 
     const refreshUser = () => {
@@ -108,15 +108,10 @@ const ShowUser = (props) => {
             : <></>}
         </p>
         {
-          (props.currentUser == undefined)?
-          <></>
-          :
-          (props.currentUser._id == showUser._id)?
-            <></>
-            :
-            (showUser.friendIds.includes(props.currentUser._id))?
-            <></>
-            :
+          (props.currentUser !== undefined) &&
+          (props.currentUser._id !== showUser._id) &&
+          (!showUser.friendIds.includes(props.currentUser._id)) &&
+
             <button onClick={addFriend}>{
               (showUser.requestIds.includes(props.currentUser._id || showUser.friendIds.includes(props.currentUser._id)))? 'Remove Friend' : "Add Friend"
             }</button>
