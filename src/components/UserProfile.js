@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const UserProfile = (props) => {
 
-  let [user, setUser] = useState(props.currentUser)
+  let user = props.currentUser
 
   // const accept = (id) => {
   //   let addedUser = [...props.currentUser.friendIds, id]
