@@ -74,7 +74,7 @@ const UserProfile = (props) => {
             receiverId:user._id,
             status:"accept"
           }
-        ).then(refreshProfile())
+      ).then(()=>refreshProfile())
   }
 
   const deny = (id) => {
@@ -86,7 +86,7 @@ const UserProfile = (props) => {
             receiverId:user._id,
             status:"deny"
           }
-        ).then(refreshProfile())
+      ).then(()=>refreshProfile())
   }
 
   const refreshProfile = () => {
