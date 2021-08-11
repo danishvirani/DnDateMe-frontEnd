@@ -23,7 +23,7 @@ const NewGroup = (props) => {
         {
           name:newName,
           admin:props.currentUser._id,
-          image:newImage
+          image:newImage || 'https://i.imgur.com/VzQvqZt.png'
         }
       ).then((response) => {
         props.setCurrentPage('groupsIndex')

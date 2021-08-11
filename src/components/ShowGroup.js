@@ -17,14 +17,21 @@ const ShowGroup = (props) => {
   }
 
   const accept = (request) => {
-
+    axios
+      .put(
+        `https://dndateme-backend.herokuapp.com/groups/${group._id}/${request}/accept`)
+      .then((response) => {
+          setGroup(response.data)
+      })
   }
 
   const deny = (request) => {
     axios
       .put(
         `https://dndateme-backend.herokuapp.com/groups/${group._id}/${request}/deny`)
-      .then(props.getGroups())
+      .then((response) => {
+          setGroup(response.data)
+      })
   }
 
   const handleEditForm = (event) => {
@@ -36,7 +43,7 @@ const ShowGroup = (props) => {
             name:newName || group.name,
             image:newImage || group.image
           }
-        ).then(refreshGroup())
+        ).then(()=>refreshGroup())
 
   }
 
@@ -47,7 +54,15 @@ const ShowGroup = (props) => {
   const refreshGroup = () => {
     axios
         .get(`https://dndateme-backend.herokuapp.com/groups/${group._id}`)
-        .then((response) => {
+        .then(()=>(response) => {
+            setGroup(response.data)
+        })
+  }
+
+  const handleJoinGroup = (currentUser) => {
+    axios
+        .put(`https://dndateme-backend.herokuapp.com/groups/${group._id}/${currentUser._id}`
+        ).then((response) => {
             setGroup(response.data)
         })
   }
@@ -72,8 +87,8 @@ const ShowGroup = (props) => {
                 {props.users.filter(user => user._id == request).map(filteredName => (
                   <p>{filteredName.firstName + ' ' + filteredName.lastName}</p>
                 ))}
-                <button onClick={accept(request)}>Accept</button>
-                <button onClick={deny(request)}>Deny</button>
+                <button onClick={()=>accept(request)}>Accept</button>
+                <button onClick={()=>deny(request)}>Deny</button>
                 </>
               )
             })
@@ -85,10 +100,8 @@ const ShowGroup = (props) => {
         <h4>Members: </h4>
 
         {
-          (props.currentUser == undefined)?
-            <></>
-            :
-            (props.currentUser._id == group.admin)?
+          (props.currentUser !== undefined) &&
+            (props.currentUser._id == group.admin) &&
               <>
               <button onClick={toggleEditGroup}>Edit Group</button>
               <form class='hidden' id='groupForm' onSubmit={(event) => handleEditForm(event)}>
@@ -99,9 +112,18 @@ const ShowGroup = (props) => {
                 <input type="submit" value="Update Group"/>
               </form>
               </>
-            : <></>
         }
-
+        {
+          (props.currentUser !== undefined) &&
+          (!group.members.includes(props.currentUser._id)) && (group.admin !== props.currentUser._id) && <>
+          {
+            (group.joinRequests.includes(props.currentUser._id))?
+            <p>Join Request Pending Approval</p>
+            :
+            <button onClick={()=>handleJoinGroup(props.currentUser)}>Join</button>
+          }
+        </>
+        }
         </>
     )
 }

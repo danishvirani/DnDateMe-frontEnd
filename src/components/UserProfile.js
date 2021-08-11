@@ -106,14 +106,12 @@ const UserProfile = (props) => {
       user.requestIds.map((id) => {
           return(
             <p>
-            {(user.friendIds.includes(id))?
-            <></>
-            :props.users.filter(user => user._id == id).map(filteredName => (
+            {(!user.friendIds.includes(id)) &&
+            props.users.filter(user => user._id == id).map(filteredName => (
               <p>{filteredName.firstName + ' ' + filteredName.lastName}</p>
             ))}
-            {(user.friendIds.includes(id))?
-            <></>
-            :<><button onClick={()=>accept(id)}>Accept</button><button onClick={()=>deny(id)}>Deny</button></>
+            {(!user.friendIds.includes(id)) &&
+            <><button onClick={()=>accept(id)}>Accept</button><button onClick={()=>deny(id)}>Deny</button></>
           }</p>
           )
       })
