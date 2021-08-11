@@ -50,7 +50,7 @@ const ShowUser = (props) => {
             senderId:props.currentUser._id,
             receiverId:showUser._id
           }
-        ).then(refreshUser())
+      ).then(()=>refreshUser())
     }
 
     const refreshUser = () => {

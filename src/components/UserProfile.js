@@ -91,9 +91,9 @@ const UserProfile = (props) => {
 
   const refreshProfile = () => {
     axios
-        .get(`https://dndateme-backend.herokuapp.com/users/${user._id}`)
+        .get(`https://dndateme-backend.herokuapp.com/users/${props.currentUser._id}`)
         .then((response) => {
-            setUser(response.data)
+            props.getCurrentUser(props.currentUser._id)
         })
   }
 
