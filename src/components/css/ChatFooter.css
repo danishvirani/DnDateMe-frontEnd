@@ -1,7 +1,7 @@
 .chatManager {
     position: fixed;
     left: calc(100vw - 265px);
-    bottom: 22px;
+    bottom: 0;
     width: 250px;
     background: var(--middleBlue);
     border-top-left-radius: 5px;
