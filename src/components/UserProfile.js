@@ -97,6 +97,18 @@ const UserProfile = (props) => {
         })
   }
 
+  const handleDeleteAccount = (currentUser) => {
+      axios
+        .delete(
+          `https://dndateme-backend.herokuapp.com/users/${currentUser._id}`
+        ).then((response) => {
+            props.setCurrentUser(undefined)
+            props.setMyChats(undefined)
+            props.getUsers()
+            props.setCurrentPage('usersIndex')
+        })
+  }
+
   return(
     <>
     <h1>{user.firstName + ' ' + user.lastName}</h1>
@@ -116,6 +128,7 @@ const UserProfile = (props) => {
           )
       })
     }
+    <button onClick={()=>handleDeleteAccount(props.currentUser)}>Delete Account</button>
     </>
   )
 }

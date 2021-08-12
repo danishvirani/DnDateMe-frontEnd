@@ -26,10 +26,10 @@ const NavBar = (props) => {
                 </ul>
                 {props.currentUser ?
                     <>
-                    <button class="btn btn-nav dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-nav dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                         Profile
                     </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                         <li><a class="dropdown-item" onClick={()=> {props.setCurrentPage('myProfile')}}>My Profile</a></li>
                         <li><a class="dropdown-item" onClick={()=> {props.setCurrentPage('editUser')}}>Edit User</a></li>
                       </ul>

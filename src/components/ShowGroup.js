@@ -8,12 +8,16 @@ const ShowGroup = (props) => {
   let [newLocation, setNewLocation] = useState('')
   let [newImage, setNewImage] = useState('')
   let [group, setGroup] = useState(props.showGroup)
+  let [newGroupChatMessage, setNewGroupChatMessage] = useState('')
 
   const handleNewName = (event) => {
     setNewName(event.target.value)
   }
   const handleNewImage = (event) => {
     setNewImage(event.target.value)
+  }
+  const handleNewGroupChatMessage = (event) => {
+    setNewGroupChatMessage(event.target.value)
   }
 
   const accept = (request) => {
@@ -62,6 +66,19 @@ const ShowGroup = (props) => {
   const handleJoinGroup = (currentUser) => {
     axios
         .put(`https://dndateme-backend.herokuapp.com/groups/${group._id}/${currentUser._id}`
+        ).then((response) => {
+            setGroup(response.data)
+        })
+  }
+
+  const handleNewGroupChatForm = (event, currentUser) => {
+    event.preventDefault()
+    axios
+        .put(
+          `https://dndateme-backend.herokuapp.com/groups/${group._id}/${currentUser._id}/message`,
+          {
+            message: newGroupChatMessage + " - " + currentUser.firstName + " " + currentUser.lastName
+          }
         ).then((response) => {
             setGroup(response.data)
         })
@@ -123,6 +140,31 @@ const ShowGroup = (props) => {
             <button onClick={()=>handleJoinGroup(props.currentUser)}>Join</button>
           }
         </>
+        }
+        {
+          (props.currentUser !== undefined) &&
+          (group.members.includes(props.currentUser._id) || group.admin == props.currentUser._id) &&
+          <div className="card">
+            <div className="card-header"><h3>Group Chat</h3></div>
+            <div className="card-body">
+              {
+                group.chat.map((messages) => {
+                  return (
+                    <p>{messages}<br/></p>
+                  )
+                })
+              }
+            </div>
+
+
+            <div className="card-footer h-25 overflow-scroll">
+              <form onSubmit={(event) => handleNewGroupChatForm(event, props.currentUser)}>
+                <label htmlFor="message">Message</label>
+                <textarea onChange={handleNewGroupChatMessage}></textarea>
+                <input type="submit" value="Post Messsage"/>
+              </form>
+            </div>
+            </div>
         }
         </>
     )

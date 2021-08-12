@@ -53,6 +53,17 @@ const ShowUser = (props) => {
         ).then(()=>refreshUser())
     }
 
+    const unFriend = () => {
+      axios
+        .put(
+          `https://dndateme-backend.herokuapp.com/users/handleUnFriend`,
+          {
+            senderId:props.currentUser._id,
+            receiverId:showUser._id
+          }
+        ).then(()=>refreshUser())
+    }
+
     const refreshUser = () => {
       axios
           .get(`https://dndateme-backend.herokuapp.com/users/${showUser._id}`)
@@ -117,6 +128,13 @@ const ShowUser = (props) => {
             }</button>
         }
         <br/>
+        {
+          (props.currentUser !== undefined) &&
+          (props.currentUser._id !== showUser._id) &&
+          (showUser.friendIds.includes(props.currentUser._id)) &&
+
+            <button onClick={unFriend}>Un-Friend</button>
+        }
         </>
     )
 }
