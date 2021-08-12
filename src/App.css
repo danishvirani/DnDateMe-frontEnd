@@ -114,6 +114,7 @@ nav > h1 {
 .userCard img {
     background: var(--black);
     max-width: 100%;
+    height: 20em;
 }
 
 /* Form styling */
@@ -155,15 +156,42 @@ input[type="submit"]{
 
 /* comment card formating */
 
-.card {
+.message-card {
   width: 50%;
   text-align: center;
 }
 
 .card-body {
-  background: var(--middleBlue)
+  background: var(--middleBlue);
+  max-width: 100%;
 }
 
 .card-header {
-  background: var(--navy)
+  background: var(--navy);
+  width: 100%;
+}
+
+/* show user image formating */
+
+.showUserImg {
+  height: 75vh;
+}
+
+.name-img {
+  width: 100%;
+}
+
+.card-footer {
+  background: var(--navy);
+  width: 100%;
+}
+
+.card {
+  width: 75%;
+}
+
+/* group formating  */
+
+.card-body > img {
+  max-width: 100%;
 }

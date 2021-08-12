@@ -9,6 +9,7 @@ const ShowGroup = (props) => {
   let [group, setGroup] = useState(props.showGroup)
   let [newGroupChatMessage, setNewGroupChatMessage] = useState('')
   let [memberNames, setMemberNames] = useState('')
+  let [adminName, setAdminName] = useState('')
 
   const handleNewName = (event) => {
     setNewName(event.target.value)
@@ -32,8 +33,18 @@ const ShowGroup = (props) => {
       })
   }
 
+  const getAdminName = (admin) => {
+      axios.get(
+        `https://dndateme-backend.herokuapp.com/users/findAdmin/${admin}`
+      ).then((response) => {
+          console.log(response)
+          setAdminName(response.data.firstName + ' ' + response.data.lastName)
+      })
+  }
+
   useEffect(() => {
       getMemberNames(group.members)
+      getAdminName(group.admin)
   },[])
 
   const accept = (request) => {
@@ -120,16 +131,26 @@ const ShowGroup = (props) => {
                 {props.users.filter(user => user._id == request).map(filteredName => (
                   <p>{filteredName.firstName + ' ' + filteredName.lastName}</p>
                 ))}
-                <button onClick={()=>accept(request)}>Accept</button>
-                <button onClick={()=>deny(request)}>Deny</button>
+                <button className="btn btn-nav" onClick={()=>accept(request)}>Accept</button>
+                <button className="btn btn-nav" onClick={()=>deny(request)}>Deny</button>
                 </>
               )
             })
             :
             <></>
         }
+        <div className="card mx-auto text-center">
+        <div className="card-header mx-auto text-center">
         <h1>{group.name}</h1>
+        </div>
+        <div className="card-body mx-auto text-center">
+        <br/><br/>
         <img src={group.image} alt={group.name}/>
+        <br/><br/>
+        <h4>Group Leader: </h4>
+        <br/><br/>
+        <p>{adminName}</p>
+        <br/><br/>
         <h4>Members: </h4>
         <br/>
         <p>{memberNames}</p>
@@ -138,7 +159,7 @@ const ShowGroup = (props) => {
           (props.currentUser !== undefined) &&
             (props.currentUser._id == group.admin) &&
               <>
-              <button onClick={toggleEditGroup}>Edit Group</button>
+              <button className="btn btn-nav" onClick={toggleEditGroup}>Edit Group</button>
               <form class='hidden' id='groupForm' onSubmit={(event) => handleEditForm(event)}>
                 <label htmlFor="name">Group Name: </label>
                 <input type="text" onChange={handleNewName}/>
@@ -148,6 +169,8 @@ const ShowGroup = (props) => {
               </form>
               </>
         }
+        </div>
+        </div>
         <br/><br/>
         {
           (props.currentUser !== undefined) &&
@@ -156,15 +179,15 @@ const ShowGroup = (props) => {
             (group.joinRequests.includes(props.currentUser._id))?
             <p>Join Request Pending Approval</p>
             :
-            <button onClick={()=>handleJoinGroup(props.currentUser)}>Join</button>
+            <button className="btn btn-nav" onClick={()=>handleJoinGroup(props.currentUser)}>Join</button>
           }
         </>
         }
         {
           (props.currentUser !== undefined) &&
           (group.members.includes(props.currentUser._id) || group.admin == props.currentUser._id) &&
-          <div className="card">
-            <div className="card-header"><h3>Group Chat</h3></div>
+          <div className="card message-card">
+            <div className="card-header message-"><h3>Group Chat</h3></div>
             <div className="card-body">
               {
                 group.chat.map((messages) => {
