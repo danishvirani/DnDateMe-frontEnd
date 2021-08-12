@@ -20,7 +20,8 @@ const NewUser = (props) => {
           lastName:props.newStates.newLastName,
           pronouns:props.newStates.newPronouns,
           faveClass:props.newStates.newFaveClass,
-          profileImg:props.newStates.newProfilePic || 'https://i.imgur.com/pIYMngN.png'
+          profileImg:props.newStates.newProfilePic || 'https://i.imgur.com/pIYMngN.png',
+          aboutMe:props.newStates.newAboutMe
         }
     ).then((response) => {
         props.getUsers()
@@ -68,9 +69,11 @@ const NewUser = (props) => {
           <option value="Warlock">Warlock</option>
           <option value="Wizard">Wizard</option>
         </select>
+        <label htmlFor="aboutMe">About Me: </label>
+        <textarea onChange={props.changeHandlers.aboutMeChange}></textarea>
         <input type="submit" value="Sign Up"/>
       </form>
-    </>
+    </
   )
 }
 

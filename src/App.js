@@ -30,6 +30,7 @@ const App = () => {
     let [newFaveClass, setNewFaveClass] = useState('')
     let [newProfilePic, setNewProfilePic] = useState('')
     let [newFriends, setNewFriends] = useState('')
+    let [newAboutMe, setNewAboutMe] = useState('')
 
 
     let [users, setUsers] = useState([])
@@ -54,7 +55,8 @@ const App = () => {
         newPronouns:newPronouns,
         newFaveClass:newFaveClass,
         newProfilePic:newProfilePic,
-        newFriends:newFriends
+        newFriends:newFriends,
+        newAboutMe:newAboutMe
     }
 
     const clearFormStates = () => {
@@ -65,6 +67,7 @@ const App = () => {
         setNewPronouns("")
         setNewProfilePic("")
         setNewFaveClass([])
+        setNewAboutMe("")
     }
 
     const changeHandlers = {
@@ -88,6 +91,9 @@ const App = () => {
         },
         classChange: (e) => {
             setNewFaveClass(e.target.value)
+        },
+        aboutMeChange: (e) => {
+            setNewAboutMe(e.target.value)
         }
     }
 

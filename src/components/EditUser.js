@@ -27,7 +27,8 @@ const EditUser = (props) => {
               firstName: props.newStates.newFirstName || currentUser.firstName,
               lastName: props.newStates.newLastName || currentUser.lastname,
               pronouns: props.newStates.newPronouns || currentUser.Pronouns,
-              faveClass: props.newStates.faveClass || currentUser.faveClass
+              faveClass: props.newStates.newFaveClass || currentUser.faveClass,
+              aboutMe: props.newStates.newAboutMe || currentUser.aboutMe
             }
         ).then((response) => {
             props.getUsers()
@@ -100,6 +101,8 @@ const EditUser = (props) => {
             <option value="Warlock">Warlock</option>
             <option value="Wizard">Wizard</option>
           </select>
+          <label htmlFor="aboutMe">About Me: </label>
+          <textarea onChange={props.changeHandlers.aboutMeChange}><textarea>
           <input type="submit" value="Update Profile"/>
         </form><br/>
 
