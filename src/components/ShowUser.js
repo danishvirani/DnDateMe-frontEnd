@@ -1,11 +1,11 @@
-import React from 'react'
-import {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
 const ShowUser = (props) => {
 
   let [newRequestIds, setNewRequestIds] = useState([])
   let [showUser, setShowUser] = useState(props.showUser)
+  let [friendNames, setfriendNames] = useState('')
 
     // const addFriend = () => {
     //   if (showUser.requestIds.includes(props.currentUser._id)) {
@@ -42,6 +42,22 @@ const ShowUser = (props) => {
     //       })
     // }
 
+    const getFriendNames = (friendsArray) => {
+      let nameArray = []
+      axios.post(`https://dndateme-backend.herokuapp.com/users/findMany`, {
+          idArray: friendsArray
+      }).then((response) => {
+          for (let user of response.data){
+              nameArray.push(`${user.firstName} ${user.lastName}`)
+          }
+          setfriendNames(nameArray.join(', '))
+      })
+    }
+
+    useEffect(() => {
+        getFriendNames(showUser.friendIds)
+    },[])
+
     const addFriend = () => {
       axios
         .put(
@@ -74,8 +90,15 @@ const ShowUser = (props) => {
 
     return(
         <>
+        <div className="card mx-auto text-center">
+        <div className="card-header mx-auto text-center">
         <h1>{showUser.firstName}</h1>
-        <img src={showUser.profileImg} alt={showUser.firstName}/>
+        </div>
+        <div className="card-body mx-auto text-center name-img">
+        <img src={showUser.profileImg} alt={showUser.firstName} className="showUserImg"/>
+        <br/><br/>
+        </div>
+        <div className="card-footer mx-auto text-center">
         <h3>Favorite Classes</h3>
         <p>{
             showUser.faveClass.includes('Artificer')?
@@ -118,12 +141,25 @@ const ShowUser = (props) => {
             <img src="https://www.enworld.org/data/attachments/25/25891-6f02824188749f93de050e9b18b83d3f.jpg" alt="Wizard"/>
             : <></>}
         </p>
+        <br/><br/>
+        <h5>Pronouns:</h5>
+        <br/>
+        <p>{showUser.pronouns}</p>
+        <br/><br/>
+        <h5>About Me:</h5>
+        <br/><br/>
+        <p>{props.currentUser.aboutMe}</p>
+        <br/><br/>
+        <h5>Friends: </h5>
+        <br/><br/>
+        <p>{friendNames}</p>
+        <br/><br/>
         {
           (props.currentUser !== undefined) &&
           (props.currentUser._id !== showUser._id) &&
           (!showUser.friendIds.includes(props.currentUser._id)) &&
 
-            <button onClick={addFriend}>{
+            <button className="btn btn-nav" onClick={addFriend}>{
               (showUser.requestIds.includes(props.currentUser._id || showUser.friendIds.includes(props.currentUser._id)))? 'Remove Friend' : "Add Friend"
             }</button>
         }
@@ -133,8 +169,10 @@ const ShowUser = (props) => {
           (props.currentUser._id !== showUser._id) &&
           (showUser.friendIds.includes(props.currentUser._id)) &&
 
-            <button onClick={unFriend}>Un-Friend</button>
+            <button className="btn btn-nav" onClick={unFriend}>Un-Friend</button>
         }
+        </div>
+        </div>
         </>
     )
 }
