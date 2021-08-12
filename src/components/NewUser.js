@@ -73,7 +73,7 @@ const NewUser = (props) => {
         <textarea onChange={props.changeHandlers.aboutMeChange}></textarea>
         <input type="submit" value="Sign Up"/>
       </form>
-    </
+    </>
   )
 }
 
