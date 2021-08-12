@@ -16,7 +16,8 @@ import GroupCard from './components/GroupCard'
 import ShowGroup from './components/ShowGroup'
 import ChatFooter from './components/ChatFooter'
 import ShowChat from './components/ShowChat'
-
+import NewGroup from './components/NewGroup'
+import EditGroup from './components/EditGroup'
 
 const App = () => {
 
@@ -57,13 +58,13 @@ const App = () => {
     }
 
     const clearFormStates = () => {
-        setNewEmail(null)
-        setNewPassword(null)
-        setNewFirstName(null)
-        setNewLastName(null)
-        setNewPronouns(null)
-        setNewProfilePic(null)
-        setNewFaveClass(null)
+        setNewEmail("")
+        setNewPassword("")
+        setNewFirstName("")
+        setNewLastName("")
+        setNewPronouns("")
+        setNewProfilePic("")
+        setNewFaveClass([])
     }
 
     const changeHandlers = {
@@ -104,7 +105,7 @@ const App = () => {
             .get('https://dndateme-backend.herokuapp.com/groups')
             .then((response) => {
                 setGroups(response.data)
-            })   
+            })
     }
 
     const getMyChats = (id) => {
@@ -165,7 +166,6 @@ const App = () => {
             handleShowUser={handleShowUser}
             setMyChats={setMyChats}/>
         <main>
-            <button onClick={getSessionUser}>Test</button>
             {currentPage === "logIn" &&
                 <LogIn
                     setCurrentPage={setCurrentPage}
@@ -179,10 +179,10 @@ const App = () => {
                     getUsers={getUsers}
                     clearFormStates={clearFormStates}
                     setCurrentPage={setCurrentPage}
+                    setCurrentUser={setCurrentUser}
                 />
             }
             {currentPage === "editUser" &&
-                <>
                 <EditUser
                     changeHandlers={changeHandlers}
                     newStates={newStates}
@@ -193,13 +193,17 @@ const App = () => {
                     setShowUser={setShowUser}
                     setCurrentPage={setCurrentPage}
                 />
+            }
+            {currentPage === "myProfile" &&
                 <UserProfile
                     currentUser={currentUser}
                     getUsers={getUsers}
                     users={users}
                     getCurrentUser={getCurrentUser}
+                    setCurrentUser={setCurrentUser}
+                    setMyChats={setMyChats}
+                    setCurrentPage={setCurrentPage}
                 />
-                </>
             }
             {currentPage === 'usersIndex' &&
                 <>
@@ -216,11 +220,16 @@ const App = () => {
             {currentPage === "showUser" &&
                 <ShowUser
                     showUser={showUser}
+                    setShowUser={setShowUser}
                     currentUser={currentUser}
-                    getUsers={getUsers}/>
+                    getCurrentUser={getCurrentUser}
+                    getUsers={getUsers}
+                    users={users}
+                />
             }
             {currentPage === 'groupsIndex' &&
                 <>
+                {getGroups()}
                 <h1>All Groups</h1>
                 <div className="cardBox">
                     {groups.map((group, index) => {
@@ -236,7 +245,16 @@ const App = () => {
                     showGroup={showGroup}
                     currentUser={currentUser}
                     getGroups={getGroups}
-                    getUsers={getUsers}/>
+                    getUsers={getUsers}
+                    users={users}
+                />
+            }
+            {currentPage === "newGroup" &&
+                <NewGroup
+                    currentUser={currentUser}
+                    setCurrentPage={setCurrentPage}
+                    getGroups={getGroups}
+                />
             }
         </main>
         {currentUser &&

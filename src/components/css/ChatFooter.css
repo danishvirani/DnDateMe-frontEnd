@@ -1,6 +1,6 @@
 .chatManager {
-    position: sticky;
-    left: calc(100vw - 250px);
+    position: fixed;
+    left: calc(100vw - 265px);
     bottom: 0;
     width: 250px;
     background: var(--middleBlue);

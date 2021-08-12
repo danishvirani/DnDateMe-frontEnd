@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# DnDateMe
+DnDateMe is a dating App were users are able to meet and play in groups with fellow DnD fans.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Technologies Used
+This project uses the MERN stack(Mongo, Express, React, Node), and consists of two applications: a front-end built on React and a back-end API built on Express.js. The API involves three collections stored on MongoDB Atlas, based on three loosely related models and controllers. Both applications are hosted on Heroku (links included at the end of this README).
 
-## Available Scripts
+### Approach Taken
+We used Trello to record and keep track of tasks and ensure our projected timeline was met. we distributed responsibilities between back-end and front-end to start to avoid any branch conflicts. As we completed the back-end work we continued to use a feature-based approach distributed between contributors to avoid potential merge conflicts.
 
-In the project directory, you can run:
+### Unsolved Problems
+We attempted incorporating session and cookie data for user login. Unfortunately, we were unable to get a working model but will continue to explore options to include it in a later release. We also want to revisit integrating Socket.io for further chat functionality and other development tools.  
 
-### `npm start`
+### User Stories
+Users are able to:
+- Create/Edit/Delete Accounts
+- View Other User Accounts & Add Them as Friends
+- Manage Friend Requests
+- Send & Receive Private Messages with Friends
+- Create and Join Groups
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Future Releases
+- Include Additional User Data and Prompt for a Customized Experience
+- Incorporate Socket.io
+- Create Working Sessions
+- Incorporate Google Maps & Geocode API
+- User Page with Posts Likes & Comments
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Links
 
-### `npm test`
+### Back-End
+## Github - https://github.com/nolomarsh/DnDateMe-backEnd
+## Live Site - https://dndateme-backend.herokuapp.com/
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Front-End
+## Github - https://github.com/danishvirani/DnDateMe-frontEnd
+## Live Site - https://dndateme.herokuapp.com/
