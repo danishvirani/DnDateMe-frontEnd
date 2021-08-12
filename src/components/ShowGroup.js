@@ -1,5 +1,4 @@
-import React from 'react'
-import {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
 const ShowGroup = (props) => {
@@ -8,6 +7,8 @@ const ShowGroup = (props) => {
   let [newLocation, setNewLocation] = useState('')
   let [newImage, setNewImage] = useState('')
   let [group, setGroup] = useState(props.showGroup)
+  let [newGroupChatMessage, setNewGroupChatMessage] = useState('')
+  let [memberNames, setMemberNames] = useState('')
 
   const handleNewName = (event) => {
     setNewName(event.target.value)
@@ -15,6 +16,25 @@ const ShowGroup = (props) => {
   const handleNewImage = (event) => {
     setNewImage(event.target.value)
   }
+  const handleNewGroupChatMessage = (event) => {
+    setNewGroupChatMessage(event.target.value)
+  }
+
+  const getMemberNames = (membersArray) => {
+      let nameArray = []
+      axios.post(`https://dndateme-backend.herokuapp.com/users/findMany`, {
+          idArray: membersArray
+      }).then((response) => {
+          for (let user of response.data){
+              nameArray.push(`${user.firstName} ${user.lastName}`)
+          }
+          setMemberNames(nameArray.join(', '))
+      })
+  }
+
+  useEffect(() => {
+      getMemberNames(group.members)
+  },[])
 
   const accept = (request) => {
     axios
@@ -67,6 +87,19 @@ const ShowGroup = (props) => {
         })
   }
 
+  const handleNewGroupChatForm = (event, currentUser) => {
+    event.preventDefault()
+    axios
+        .put(
+          `https://dndateme-backend.herokuapp.com/groups/${group._id}/${currentUser._id}/message`,
+          {
+            message: newGroupChatMessage + " - " + currentUser.firstName + " " + currentUser.lastName
+          }
+        ).then((response) => {
+            setGroup(response.data)
+        })
+  }
+
   // {group.members.map((member) => {
   //   return ( <>
   //     {props.users.filter(user => user._id == member).map(filteredName => (
@@ -98,7 +131,9 @@ const ShowGroup = (props) => {
         <h1>{group.name}</h1>
         <img src={group.image} alt={group.name}/>
         <h4>Members: </h4>
-
+        <br/>
+        <p>{memberNames}</p>
+        <br/><br/>
         {
           (props.currentUser !== undefined) &&
             (props.currentUser._id == group.admin) &&
@@ -113,6 +148,7 @@ const ShowGroup = (props) => {
               </form>
               </>
         }
+        <br/><br/>
         {
           (props.currentUser !== undefined) &&
           (!group.members.includes(props.currentUser._id)) && (group.admin !== props.currentUser._id) && <>
@@ -123,6 +159,31 @@ const ShowGroup = (props) => {
             <button onClick={()=>handleJoinGroup(props.currentUser)}>Join</button>
           }
         </>
+        }
+        {
+          (props.currentUser !== undefined) &&
+          (group.members.includes(props.currentUser._id) || group.admin == props.currentUser._id) &&
+          <div className="card">
+            <div className="card-header"><h3>Group Chat</h3></div>
+            <div className="card-body">
+              {
+                group.chat.map((messages) => {
+                  return (
+                    <p>{messages}<br/></p>
+                  )
+                })
+              }
+            </div>
+
+
+            <div className="card-footer w-100 overflow-scroll mx-auto">
+              <form className="mx-auto" onSubmit={(event) => handleNewGroupChatForm(event, props.currentUser)}>
+                <label htmlFor="message">Message</label>
+                <textarea onChange={handleNewGroupChatMessage}></textarea>
+                <input type="submit" value="Post Messsage"/>
+              </form>
+            </div>
+            </div>
         }
         </>
     )

@@ -26,7 +26,8 @@ const NewGroup = (props) => {
           image:newImage || 'https://i.imgur.com/VzQvqZt.png'
         }
       ).then((response) => {
-        props.setCurrentPage('groupsIndex')
+          props.getGroups()
+          props.setCurrentPage('groupsIndex')
       })
   }
 

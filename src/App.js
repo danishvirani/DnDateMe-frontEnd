@@ -200,6 +200,9 @@ const App = () => {
                     getUsers={getUsers}
                     users={users}
                     getCurrentUser={getCurrentUser}
+                    setCurrentUser={setCurrentUser}
+                    setMyChats={setMyChats}
+                    setCurrentPage={setCurrentPage}
                 />
             }
             {currentPage === 'usersIndex' &&
@@ -249,7 +252,9 @@ const App = () => {
             {currentPage === "newGroup" &&
                 <NewGroup
                     currentUser={currentUser}
-                    setCurrentPage={setCurrentPage}/>
+                    setCurrentPage={setCurrentPage}
+                    getGroups={getGroups}
+                />
             }
         </main>
         {currentUser &&
