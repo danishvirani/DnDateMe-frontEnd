@@ -148,7 +148,7 @@ const ShowUser = (props) => {
         <br/><br/>
         <h5>About Me:</h5>
         <br/><br/>
-        <p>{props.currentUser.aboutMe}</p>
+        <p>{showUser.aboutMe}</p>
         <br/><br/>
         <h5>Friends: </h5>
         <br/><br/>
