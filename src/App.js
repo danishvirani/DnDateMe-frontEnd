@@ -180,6 +180,7 @@ const App = () => {
                     getUsers={getUsers}
                     clearFormStates={clearFormStates}
                     setCurrentPage={setCurrentPage}
+                    setCurrentUser={setCurrentUser}
                 />
             }
             {currentPage === "editUser" &&

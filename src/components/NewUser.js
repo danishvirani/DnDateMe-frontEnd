@@ -22,7 +22,10 @@ const NewUser = (props) => {
           faveClass:props.newStates.newFaveClass,
           profileImg:props.newStates.newProfilePic || 'https://i.imgur.com/pIYMngN.png'
         }
-      ).then(props.getUsers())
+    ).then((response) => {
+        props.getUsers()
+        props.setCurrentUser(response.data)
+    })
       event.target.reset()
       props.clearFormStates()
       props.setCurrentPage('usersIndex')

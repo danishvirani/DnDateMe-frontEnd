@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const UserProfile = (props) => {
 
-  let [user, setUser] = useState(props.currentUser)
+  let user = props.currentUser
 
   // const accept = (id) => {
   //   let addedUser = [...props.currentUser.friendIds, id]
@@ -74,7 +74,7 @@ const UserProfile = (props) => {
             receiverId:user._id,
             status:"accept"
           }
-        ).then(refreshProfile())
+      ).then(()=>refreshProfile())
   }
 
   const deny = (id) => {
@@ -86,14 +86,14 @@ const UserProfile = (props) => {
             receiverId:user._id,
             status:"deny"
           }
-        ).then(refreshProfile())
+      ).then(()=>refreshProfile())
   }
 
   const refreshProfile = () => {
     axios
-        .get(`https://dndateme-backend.herokuapp.com/users/${user._id}`)
+        .get(`https://dndateme-backend.herokuapp.com/users/${props.currentUser._id}`)
         .then((response) => {
-            setUser(response.data)
+            props.getCurrentUser(props.currentUser._id)
         })
   }
 
