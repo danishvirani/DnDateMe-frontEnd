@@ -1,9 +1,9 @@
-import React from 'react'
-import {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
 const UserProfile = (props) => {
 
+  let [friendNames, setfriendNames] = useState('')
   let user = props.currentUser
 
   // const accept = (id) => {
@@ -65,6 +65,22 @@ const UserProfile = (props) => {
   //     props.getCurrentUser(props.currentUser._id)
   // }
 
+  const getFriendNames = (friendArray) => {
+      let nameArray = []
+      axios.post(`https://dndateme-backend.herokuapp.com/users/findMany`, {
+          idArray: friendArray
+      }).then((response) => {
+          for (let user of response.data){
+              nameArray.push(`${user.firstName} ${user.lastName}`)
+          }
+          setfriendNames(nameArray.join(', '))
+      })
+  }
+
+  useEffect(() => {
+      getFriendNames(props.currentUser.friendIds)
+  },[])
+
   const accept = (id) => {
       axios
         .put(
@@ -112,8 +128,14 @@ const UserProfile = (props) => {
   return(
     <>
     <h1>{user.firstName + ' ' + user.lastName}</h1>
+    <br/><br/>
     <img src={user.profileImg}/>
+    <br/><br/>
+    <h5>Friends:</h5>
+    <br/><br/>
+    {friendNames}
     <h5>Friend Requests:</h5>
+    <br/><br/>
     {
       user.requestIds.map((id) => {
           return(
@@ -123,12 +145,12 @@ const UserProfile = (props) => {
               <p>{filteredName.firstName + ' ' + filteredName.lastName}</p>
             ))}
             {(!user.friendIds.includes(id)) &&
-            <><button onClick={()=>accept(id)}>Accept</button><button onClick={()=>deny(id)}>Deny</button></>
+            <><button className="btn btn-nav" onClick={()=>accept(id)}>Accept</button><button className="btn btn-nav" onClick={()=>deny(id)}>Deny</button></>
           }</p>
           )
       })
     }
-    <button onClick={()=>handleDeleteAccount(props.currentUser)}>Delete Account</button>
+    <button className="btn btn-nav" onClick={()=>handleDeleteAccount(props.currentUser)}>Delete Account</button>
     </>
   )
 }

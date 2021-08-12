@@ -1,5 +1,4 @@
-import React from 'react'
-import {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
 const ShowGroup = (props) => {
@@ -9,6 +8,7 @@ const ShowGroup = (props) => {
   let [newImage, setNewImage] = useState('')
   let [group, setGroup] = useState(props.showGroup)
   let [newGroupChatMessage, setNewGroupChatMessage] = useState('')
+  let [memberNames, setMemberNames] = useState('')
 
   const handleNewName = (event) => {
     setNewName(event.target.value)
@@ -19,6 +19,22 @@ const ShowGroup = (props) => {
   const handleNewGroupChatMessage = (event) => {
     setNewGroupChatMessage(event.target.value)
   }
+
+  const getMemberNames = (membersArray) => {
+      let nameArray = []
+      axios.post(`https://dndateme-backend.herokuapp.com/users/findMany`, {
+          idArray: membersArray
+      }).then((response) => {
+          for (let user of response.data){
+              nameArray.push(`${user.firstName} ${user.lastName}`)
+          }
+          setMemberNames(nameArray.join(', '))
+      })
+  }
+
+  useEffect(() => {
+      getMemberNames(group.members)
+  },[])
 
   const accept = (request) => {
     axios
@@ -115,7 +131,9 @@ const ShowGroup = (props) => {
         <h1>{group.name}</h1>
         <img src={group.image} alt={group.name}/>
         <h4>Members: </h4>
-
+        <br/>
+        <p>{memberNames}</p>
+        <br/><br/>
         {
           (props.currentUser !== undefined) &&
             (props.currentUser._id == group.admin) &&
@@ -130,6 +148,7 @@ const ShowGroup = (props) => {
               </form>
               </>
         }
+        <br/><br/>
         {
           (props.currentUser !== undefined) &&
           (!group.members.includes(props.currentUser._id)) && (group.admin !== props.currentUser._id) && <>
@@ -157,8 +176,8 @@ const ShowGroup = (props) => {
             </div>
 
 
-            <div className="card-footer h-25 overflow-scroll">
-              <form onSubmit={(event) => handleNewGroupChatForm(event, props.currentUser)}>
+            <div className="card-footer w-100 overflow-scroll mx-auto">
+              <form className="mx-auto" onSubmit={(event) => handleNewGroupChatForm(event, props.currentUser)}>
                 <label htmlFor="message">Message</label>
                 <textarea onChange={handleNewGroupChatMessage}></textarea>
                 <input type="submit" value="Post Messsage"/>

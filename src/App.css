@@ -152,3 +152,18 @@ input[type="submit"]{
     background: var(--strawberry);
     color: var(--coolWhite)
 }
+
+/* comment card formating */
+
+.card {
+  width: 50%;
+  text-align: center;
+}
+
+.card-body {
+  background: var(--middleBlue)
+}
+
+.card-header {
+  background: var(--navy)
+}
